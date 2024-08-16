@@ -56,5 +56,8 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "gmtk24.sln"
+    "dotnet.defaultSolution": "gmtk24.sln",
+    "cSpell.words": [
+        "GMTK"
+    ]
 }
