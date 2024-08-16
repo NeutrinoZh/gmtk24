@@ -5048,6 +5048,6 @@ MonoBehaviour:
   _friction: 0.02
   _speed: 3
   _acceleration: 0.2
-  _angularFriction: 0.01
+  _angularFriction: 0.8
   _angularSpeed: 70
   _angularAcceleration: 3
