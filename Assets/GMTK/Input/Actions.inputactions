@@ -2,14 +2,14 @@
     "name": "Actions",
     "maps": [
         {
-            "name": "Main",
+            "name": "PlayerBody",
             "id": "82dbc453-2c8e-4032-8468-2f28e8986d93",
             "actions": [
                 {
-                    "name": "Pointer",
+                    "name": "Move",
                     "type": "Value",
-                    "id": "d8f551ac-4746-414e-aaa5-8144a03016cf",
-                    "expectedControlType": "Touch",
+                    "id": "7eed9a70-124a-4169-8de0-a139388f4692",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -17,15 +17,59 @@
             ],
             "bindings": [
                 {
-                    "name": "",
-                    "id": "ca9103a3-c59a-49d8-8ffb-6340678eb15f",
-                    "path": "<Touchscreen>/primaryTouch",
+                    "name": "2D Vector",
+                    "id": "bdb7d59b-7c78-49d5-aa3c-3ee50fd780e8",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Pointer",
-                    "isComposite": false,
+                    "action": "Move",
+                    "isComposite": true,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "0cb5e8ec-20fa-432e-b069-47f505c3a0d6",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "0f3aab71-77eb-440a-834f-f063c375762f",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "33b223be-5c43-4be4-82b6-30115f90c0ee",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "5c6c5d0f-fe1c-4eb4-ba8c-e0e54d85da19",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }

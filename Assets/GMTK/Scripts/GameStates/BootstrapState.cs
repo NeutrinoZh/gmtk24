@@ -30,6 +30,7 @@ namespace GMTK.GameStates
         {
             ServiceLocator.Instance.Register(new ResourceManager());
             ServiceLocator.Instance.Register(new InputController());
+            ServiceLocator.Instance.Register(new PlayerStats());
         }
     }
 }

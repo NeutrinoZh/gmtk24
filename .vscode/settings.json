@@ -58,6 +58,7 @@
     },
     "dotnet.defaultSolution": "gmtk24.sln",
     "cSpell.words": [
-        "GMTK"
+        "GMTK",
+        "Mathf"
     ]
 }
