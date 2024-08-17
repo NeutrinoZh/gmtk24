@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4010140487636830674}
   - component: {fileID: 2225086697283465614}
-  - component: {fileID: 8480559852575221241}
   - component: {fileID: 3089290741938929314}
-  - component: {fileID: -7901205290236201200}
   - component: {fileID: 4030958730235458231}
+  - component: {fileID: 4174201182224425712}
+  - component: {fileID: 6447975583405041474}
   m_Layer: 0
   m_Name: Cell
   m_TagString: Untagged
@@ -88,7 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8480559852575221241
 --- !u!50 &3089290741938929314
 Rigidbody2D:
   serializedVersion: 4
@@ -116,18 +115,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &-7901205290236201200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3083464567721885813}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cd8f551e204a2440ad1afa41177d26a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!60 &4030958730235458231
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -275,3 +262,28 @@ PolygonCollider2D:
       - {x: 0.1953125, y: -0.6269531}
       - {x: 0.2421875, y: -0.625}
   m_UseDelaunayMesh: 0
+--- !u!114 &4174201182224425712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3083464567721885813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9b2ad000fe6ff0b88927f12528b183b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 10
+--- !u!114 &6447975583405041474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3083464567721885813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cd8f551e204a2440ad1afa41177d26a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
