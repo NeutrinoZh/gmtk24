@@ -461,6 +461,58 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletPrefab: {fileID: 4027225237774687317, guid: 1f761797de14c9a49bbd3e5641999789, type: 3}
+--- !u!1 &2136286275
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2136286277}
+  - component: {fileID: 2136286276}
+  m_Layer: 0
+  m_Name: BGBacteriaManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2136286276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136286275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c578949b5b20839d49d42a63c5833468, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefabs:
+  - {fileID: 8978696084588033162, guid: 211757a9c723ef800b5eae4c5dd63898, type: 3}
+  - {fileID: 6521005446078053830, guid: 11231c688001d5b9a8874dea4aa36b54, type: 3}
+  - {fileID: 4390634558351479706, guid: bf5207df213d68898b7a607f7cac1110, type: 3}
+  _startBacteriaCount: 15
+  _bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 40, y: 40, z: 0}
+--- !u!4 &2136286277
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136286275}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10.2564945, y: 7.296974, z: -0.43262258}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -471,3 +523,4 @@ SceneRoots:
   - {fileID: 2014929629}
   - {fileID: 1291881435}
   - {fileID: 2122897177}
+  - {fileID: 2136286277}
