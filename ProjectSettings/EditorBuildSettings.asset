@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/GMTK/Scenes/Menu.unity
+    guid: 3e86a5e44b1c6aa9986d93ef9401e04e
+  - enabled: 1
     path: Assets/GMTK/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}

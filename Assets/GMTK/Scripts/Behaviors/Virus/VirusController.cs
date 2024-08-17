@@ -8,7 +8,10 @@ namespace GMTK
     public class VirusController : MonoBehaviour
     {
         private CellManager _cellManager;
+        private VirusManager _virusManager;
+
         private VirusStats _virusStats;
+
         private DriftMovableObject _body;
         private Transform _target;
 
@@ -20,11 +23,14 @@ namespace GMTK
             _cellManager = ServiceLocator.Instance.Get<CellManager>();
             _target = _cellManager.FindNearToPoint(transform.position);
 
+            _virusManager = ServiceLocator.Instance.Get<VirusManager>();
+
             _virusStats = GetComponent<VirusStats>();
             _virusStats.Init();
             _virusStats.OnHealthChanged += HandleHealthChanged;
 
             ChangeBehavior(new MoveToCell());
+
         }
 
         private void FixedUpdate()
@@ -36,6 +42,8 @@ namespace GMTK
         {
             if (currentHealth <= 0)
             {
+                _virusManager.RemoveObject(transform);
+                _virusManager.RemoveObject(transform);
                 Destroy(gameObject);
             }
         }
@@ -54,7 +62,6 @@ namespace GMTK
             yield return new WaitForSeconds(_virusStats.DelayBeforePenetration);
             ChangeBehavior(new PenetrationIntoCell(cell));
         }
-
 
         private void ChangeBehavior(IBehavior behavior)
         {
