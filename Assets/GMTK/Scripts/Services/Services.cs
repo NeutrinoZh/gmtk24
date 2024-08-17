@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace GMTK.Services
 {
@@ -13,6 +14,10 @@ namespace GMTK.Services
         public void Register<T>(T service) where T : IService
         {
             _services.Add(typeof(T), service);
+
+#if UNITY_EDITOR
+            Debug.Log($"Register new service: {typeof(T)}");
+#endif
         }
 
         public T Get<T>() where T : IService

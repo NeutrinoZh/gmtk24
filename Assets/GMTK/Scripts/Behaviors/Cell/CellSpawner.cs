@@ -1,7 +1,11 @@
+using GMTK.Services;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace GMTK
 {
+    public class CellManager : ObjectManager { };
+
     public class CellSpawner : MonoBehaviour
     {
         [SerializeField] private Transform _cellPrefab;
@@ -11,6 +15,9 @@ namespace GMTK
 
         private void Awake()
         {
+            var manager = transform.AddComponent<CellManager>();
+            ServiceLocator.Instance.Register(manager);
+
             for (int i = 0; i < _cellCount; ++i)
                 SpawnCell();
         }

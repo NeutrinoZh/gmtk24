@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 101
   m_Sprite: {fileID: 21300000, guid: 80c950c6fbfb145489ff44ec388bab6b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -4882,7 +4882,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -4987,7 +4987,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 101
   m_Sprite: {fileID: 7482667652216324306, guid: 26b22d9ee50963f4eacddad7ce6a67da, type: 3}
   m_Color: {r: 0.13962269, g: 0.13962269, b: 0.13962269, a: 1}
   m_FlipX: 0
@@ -5010,6 +5010,7 @@ GameObject:
   - component: {fileID: 8606209199671591412}
   - component: {fileID: 5209961479369042764}
   - component: {fileID: 378154601459727843}
+  - component: {fileID: 3354424670928061302}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -5046,12 +5047,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f15cf000b323da9408f1d86695936be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _friction: 0.02
-  _speed: 3
-  _acceleration: 0.2
-  _angularFriction: 0.8
-  _angularSpeed: 70
-  _angularAcceleration: 3
 --- !u!114 &378154601459727843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5064,6 +5059,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d05eb44657fd0f4b9256f2ca47ad050, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3354424670928061302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4626583103710619316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c792a76bcaf6144b85d813ce27c981d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _friction: 0.02
+  _speed: 3
+  _acceleration: 1
+  _angularFriction: 0.8
+  _angularSpeed: 80
+  _angularAcceleration: 5
 --- !u!1 &9132781471575069743
 GameObject:
   m_ObjectHideFlags: 0
