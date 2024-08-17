@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 697083152541411791}
   - component: {fileID: 5153227940720375673}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 2962052432895552684}
   - component: {fileID: 3737395053082080037}
   - component: {fileID: 4556874203376630006}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bubbles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4925,7 +4925,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7599956719394627767}
   - component: {fileID: 6065842994019062221}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5013,7 +5013,7 @@ GameObject:
   - component: {fileID: 3354424670928061302}
   - component: {fileID: 1879675957597179286}
   - component: {fileID: 7030177624050071867}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5161,7 +5161,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5267248891490517249}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}

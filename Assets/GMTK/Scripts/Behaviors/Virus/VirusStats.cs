@@ -1,10 +1,11 @@
 using System;
+using UnityEngine;
 
 namespace GMTK
 {
     public class VirusStats : Stats, IDamageable
     {
-        public override event Action<int> OnHealthChanged;
+        [field: SerializeField] public float DelayBeforePenetration { get; private set; }
 
         void IDamageable.Damage(int damage)
         {

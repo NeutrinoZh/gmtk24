@@ -1,5 +1,6 @@
 using GMTK.Services;
 using GMTK.VirusBehaviors;
+using System.Collections;
 using UnityEngine;
 
 namespace GMTK
@@ -23,8 +24,7 @@ namespace GMTK
             _virusStats.Init();
             _virusStats.OnHealthChanged += HandleHealthChanged;
 
-            _behavior = new MoveToCell();
-            _behavior.Init(transform);
+            ChangeBehavior(new MoveToCell());
         }
 
         private void FixedUpdate()
@@ -40,13 +40,26 @@ namespace GMTK
             }
         }
 
-        private void OnCollisionEnter2D(Collision2D other)
+        private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.TryGetComponent(out CellController cell))
             {
-                _behavior = new AttackCell(cell.transform);
-                _behavior.Init(transform);
+                ChangeBehavior(new AttackCell(cell.transform));
+                StartCoroutine(StartPenetrationAfterDelay(cell.transform));
             }
+        }
+
+        private IEnumerator StartPenetrationAfterDelay(Transform cell)
+        {
+            yield return new WaitForSeconds(_virusStats.DelayBeforePenetration);
+            ChangeBehavior(new PenetrationIntoCell(cell));
+        }
+
+
+        private void ChangeBehavior(IBehavior behavior)
+        {
+            _behavior = behavior;
+            _behavior.Init(transform);
         }
     }
 }
