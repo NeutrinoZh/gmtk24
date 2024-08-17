@@ -39,5 +39,11 @@ namespace GMTK
             _angularVelocity += _angularFriction * -Mathf.Sign(_angularVelocity);
             _angularVelocity = Mathf.Clamp(_angularVelocity, -_angularSpeed, _angularSpeed);
         }
+
+        public void Stop()
+        {
+            _velocity = Vector3.zero;
+            _angularVelocity = 0;
+        }
     }
 }
