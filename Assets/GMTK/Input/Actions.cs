@@ -124,7 +124,7 @@ namespace GMTK
                 {
                     ""name"": """",
                     ""id"": ""e6e2c81f-bb45-49c9-bd13-20e48cab6248"",
-                    ""path"": ""<Mouse>/position"",
+                    ""path"": ""<Pointer>/position"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

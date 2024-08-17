@@ -12,7 +12,7 @@ namespace GMTK
         private Transform _turret;
         private Transform _bulletSpawnPoint;
 
-        private void Awake()
+        private void Start()
         {
             _input = ServiceLocator.Instance.Get<InputController>();
             _bulletManager = ServiceLocator.Instance.Get<BulletManager>();
