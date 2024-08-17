@@ -109,6 +109,15 @@ namespace GMTK
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Fire"",
+                    ""type"": ""Button"",
+                    ""id"": ""f0e6bffc-ce56-4f8a-8b38-5ff261b5eb14"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -120,6 +129,17 @@ namespace GMTK
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pointer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c764edb7-83aa-4030-90da-26ee617e292a"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -134,6 +154,7 @@ namespace GMTK
             // PlayerTurret
             m_PlayerTurret = asset.FindActionMap("PlayerTurret", throwIfNotFound: true);
             m_PlayerTurret_Pointer = m_PlayerTurret.FindAction("Pointer", throwIfNotFound: true);
+            m_PlayerTurret_Fire = m_PlayerTurret.FindAction("Fire", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -242,11 +263,13 @@ namespace GMTK
         private readonly InputActionMap m_PlayerTurret;
         private List<IPlayerTurretActions> m_PlayerTurretActionsCallbackInterfaces = new List<IPlayerTurretActions>();
         private readonly InputAction m_PlayerTurret_Pointer;
+        private readonly InputAction m_PlayerTurret_Fire;
         public struct PlayerTurretActions
         {
             private @Actions m_Wrapper;
             public PlayerTurretActions(@Actions wrapper) { m_Wrapper = wrapper; }
             public InputAction @Pointer => m_Wrapper.m_PlayerTurret_Pointer;
+            public InputAction @Fire => m_Wrapper.m_PlayerTurret_Fire;
             public InputActionMap Get() { return m_Wrapper.m_PlayerTurret; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -259,6 +282,9 @@ namespace GMTK
                 @Pointer.started += instance.OnPointer;
                 @Pointer.performed += instance.OnPointer;
                 @Pointer.canceled += instance.OnPointer;
+                @Fire.started += instance.OnFire;
+                @Fire.performed += instance.OnFire;
+                @Fire.canceled += instance.OnFire;
             }
 
             private void UnregisterCallbacks(IPlayerTurretActions instance)
@@ -266,6 +292,9 @@ namespace GMTK
                 @Pointer.started -= instance.OnPointer;
                 @Pointer.performed -= instance.OnPointer;
                 @Pointer.canceled -= instance.OnPointer;
+                @Fire.started -= instance.OnFire;
+                @Fire.performed -= instance.OnFire;
+                @Fire.canceled -= instance.OnFire;
             }
 
             public void RemoveCallbacks(IPlayerTurretActions instance)
@@ -290,6 +319,7 @@ namespace GMTK
         public interface IPlayerTurretActions
         {
             void OnPointer(InputAction.CallbackContext context);
+            void OnFire(InputAction.CallbackContext context);
         }
     }
 }
