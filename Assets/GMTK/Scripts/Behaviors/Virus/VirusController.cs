@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace GMTK
 {
-    public class VirusController : MonoBehaviour
+    public class VirusController : MonoBehaviour, IDamageable
     {
         private CellManager _cellManager;
 
@@ -24,6 +24,11 @@ namespace GMTK
 
             _body.Rotate(Mathf.Sign(product));
             _body.Move(1f);
+        }
+
+        void IDamageable.Damage(int damage)
+        {
+            Destroy(gameObject);
         }
     }
 }

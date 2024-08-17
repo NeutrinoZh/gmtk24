@@ -10,10 +10,21 @@ namespace GMTK
         private const int k_poolCapacity = 50;
 
         [SerializeField] private Transform _bulletPrefab;
-        [SerializeField] private float _bulletLifetime;
 
         private IObjectPool<Transform> _bulletPool;
 
+        public void SpawnBullet(Vector3 position, Vector3 direction)
+        {
+            var obj = _bulletPool.Get();
+
+            obj.transform.position = position;
+            obj.transform.right = direction;
+        }
+
+        public void DestroyBullet(Transform bullet)
+        {
+            _bulletPool.Release(bullet);
+        }
 
         private void Awake()
         {
@@ -24,24 +35,8 @@ namespace GMTK
                 obj => obj.gameObject.SetActive(true),
                 obj => obj.gameObject.SetActive(false),
                 obj => Destroy(obj.gameObject),
-                true, k_poolCapacity
+                false, k_poolCapacity
             );
-        }
-
-        public void SpawnBullet(Vector3 position, Vector3 direction)
-        {
-            var obj = _bulletPool.Get();
-
-            obj.transform.position = position;
-            obj.transform.right = direction;
-
-            StartCoroutine(BulletDestroyByDelay(obj));
-        }
-
-        private IEnumerator BulletDestroyByDelay(Transform bullet)
-        {
-            yield return new WaitForSeconds(_bulletLifetime);
-            _bulletPool.Release(bullet);
         }
     }
 }
