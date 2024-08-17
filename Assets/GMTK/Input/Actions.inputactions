@@ -120,6 +120,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "PlayerPenetration",
+            "id": "69f12287-da9f-4b89-be53-70e32eeae7b9",
+            "actions": [
+                {
+                    "name": "Penetration",
+                    "type": "Button",
+                    "id": "48e1e559-7557-4439-86b9-ab81437c761e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "cdbda100-c381-4746-a2f0-1b87bb3d10a1",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Penetration",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

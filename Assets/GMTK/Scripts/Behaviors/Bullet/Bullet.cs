@@ -1,3 +1,4 @@
+using GMTK.GameStates;
 using GMTK.Services;
 using System.Collections;
 using UnityEngine;
@@ -11,20 +12,25 @@ namespace GMTK
         [SerializeField] private int _damage;
 
         private BulletManager _bulletManager;
-
-        private void Start()
-        {
-            _bulletManager = ServiceLocator.Instance.Get<BulletManager>();
-        }
+        private GamePlayState _gamePlayState;
 
         private void Update()
         {
-            transform.position += Time.deltaTime * _speed * transform.right;
+            var velocity = Time.deltaTime * _speed * transform.right;
+            if (_gamePlayState.State == WorldState.MICRO_WORLD)
+                velocity *= 0.3f;
+            transform.position += velocity;
         }
 
         private void OnEnable()
         {
+            _bulletManager ??= ServiceLocator.Instance.Get<BulletManager>();
+            _gamePlayState ??= ServiceLocator.Instance.Get<GamePlayState>();
+
             StartCoroutine(BulletDestroyByDelay());
+
+            if (_gamePlayState.State == WorldState.MICRO_WORLD) transform.localScale = new(0.3f, 0.3f, 1);
+            if (_gamePlayState.State == WorldState.MACRO_WORLD) transform.localScale = new(1f, 1f, 1);
         }
 
         private void OnTriggerEnter2D(Collider2D other)

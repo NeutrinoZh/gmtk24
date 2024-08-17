@@ -144,6 +144,34 @@ namespace GMTK
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""PlayerPenetration"",
+            ""id"": ""69f12287-da9f-4b89-be53-70e32eeae7b9"",
+            ""actions"": [
+                {
+                    ""name"": ""Penetration"",
+                    ""type"": ""Button"",
+                    ""id"": ""48e1e559-7557-4439-86b9-ab81437c761e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""cdbda100-c381-4746-a2f0-1b87bb3d10a1"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Penetration"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -155,6 +183,9 @@ namespace GMTK
             m_PlayerTurret = asset.FindActionMap("PlayerTurret", throwIfNotFound: true);
             m_PlayerTurret_Pointer = m_PlayerTurret.FindAction("Pointer", throwIfNotFound: true);
             m_PlayerTurret_Fire = m_PlayerTurret.FindAction("Fire", throwIfNotFound: true);
+            // PlayerPenetration
+            m_PlayerPenetration = asset.FindActionMap("PlayerPenetration", throwIfNotFound: true);
+            m_PlayerPenetration_Penetration = m_PlayerPenetration.FindAction("Penetration", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -312,6 +343,52 @@ namespace GMTK
             }
         }
         public PlayerTurretActions @PlayerTurret => new PlayerTurretActions(this);
+
+        // PlayerPenetration
+        private readonly InputActionMap m_PlayerPenetration;
+        private List<IPlayerPenetrationActions> m_PlayerPenetrationActionsCallbackInterfaces = new List<IPlayerPenetrationActions>();
+        private readonly InputAction m_PlayerPenetration_Penetration;
+        public struct PlayerPenetrationActions
+        {
+            private @Actions m_Wrapper;
+            public PlayerPenetrationActions(@Actions wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Penetration => m_Wrapper.m_PlayerPenetration_Penetration;
+            public InputActionMap Get() { return m_Wrapper.m_PlayerPenetration; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(PlayerPenetrationActions set) { return set.Get(); }
+            public void AddCallbacks(IPlayerPenetrationActions instance)
+            {
+                if (instance == null || m_Wrapper.m_PlayerPenetrationActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_PlayerPenetrationActionsCallbackInterfaces.Add(instance);
+                @Penetration.started += instance.OnPenetration;
+                @Penetration.performed += instance.OnPenetration;
+                @Penetration.canceled += instance.OnPenetration;
+            }
+
+            private void UnregisterCallbacks(IPlayerPenetrationActions instance)
+            {
+                @Penetration.started -= instance.OnPenetration;
+                @Penetration.performed -= instance.OnPenetration;
+                @Penetration.canceled -= instance.OnPenetration;
+            }
+
+            public void RemoveCallbacks(IPlayerPenetrationActions instance)
+            {
+                if (m_Wrapper.m_PlayerPenetrationActionsCallbackInterfaces.Remove(instance))
+                    UnregisterCallbacks(instance);
+            }
+
+            public void SetCallbacks(IPlayerPenetrationActions instance)
+            {
+                foreach (var item in m_Wrapper.m_PlayerPenetrationActionsCallbackInterfaces)
+                    UnregisterCallbacks(item);
+                m_Wrapper.m_PlayerPenetrationActionsCallbackInterfaces.Clear();
+                AddCallbacks(instance);
+            }
+        }
+        public PlayerPenetrationActions @PlayerPenetration => new PlayerPenetrationActions(this);
         public interface IPlayerBodyActions
         {
             void OnMove(InputAction.CallbackContext context);
@@ -320,6 +397,10 @@ namespace GMTK
         {
             void OnPointer(InputAction.CallbackContext context);
             void OnFire(InputAction.CallbackContext context);
+        }
+        public interface IPlayerPenetrationActions
+        {
+            void OnPenetration(InputAction.CallbackContext context);
         }
     }
 }
