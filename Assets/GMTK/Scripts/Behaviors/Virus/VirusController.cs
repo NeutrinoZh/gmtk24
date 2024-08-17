@@ -1,34 +1,35 @@
-using GMTK.Services;
+using GMTK.VirusBehaviors;
 using UnityEngine;
 
 namespace GMTK
 {
     public class VirusController : MonoBehaviour, IDamageable
     {
-        private CellManager _cellManager;
-
-        private DriftMovableObject _body;
-        private Transform _target;
+        private IBehavior _behavior;
 
         private void Start()
         {
-            _body = GetComponent<DriftMovableObject>();
-            _cellManager = ServiceLocator.Instance.Get<CellManager>();
-            _target = _cellManager.FindNearToPoint(transform.position);
+            _behavior = new MoveToCell();
+            _behavior.Init(transform);
         }
 
         private void FixedUpdate()
         {
-            var direction = _target.position - transform.position;
-            float product = transform.right.x * direction.y - transform.right.y * direction.x;
-
-            _body.Rotate(Mathf.Sign(product));
-            _body.Move(1f);
+            _behavior.FixedUpdate();
         }
 
         void IDamageable.Damage(int damage)
         {
             Destroy(gameObject);
+        }
+
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            if (other.gameObject.TryGetComponent(out CellController cell))
+            {
+                _behavior = new AttackCell(cell.transform);
+                _behavior.Init(transform);
+            }
         }
     }
 }
