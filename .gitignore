@@ -20,6 +20,7 @@ obj/
 *.png~
 
 [Bb]uild/
+[Bb]uilds/
 [Ll]ibrary/
 [Uu]serSettings/
 [Tt]emp/
