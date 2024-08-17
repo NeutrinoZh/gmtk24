@@ -29,6 +29,25 @@ namespace GMTK
             return nearestObject;
         }
 
+        public Transform FindNearToPoint(Vector3 position, out float sqrDistance)
+        {
+            Transform nearestObject = null;
+            float minSqrDistance = Mathf.Infinity;
+
+            foreach (Transform obj in _objects)
+            {
+                sqrDistance = (obj.position - position).sqrMagnitude;
+                if (sqrDistance < minSqrDistance)
+                {
+                    minSqrDistance = sqrDistance;
+                    nearestObject = obj;
+                }
+            }
+
+            sqrDistance = minSqrDistance;
+            return nearestObject;
+        }
+
         public void AddObject(Transform _object)
         {
             if (_objects.Contains(_object))

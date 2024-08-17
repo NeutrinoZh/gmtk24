@@ -3,21 +3,20 @@ using UnityEngine;
 
 namespace GMTK
 {
-    public class CameraFollow : MonoBehaviour
+    public class CameraFollow : MonoBehaviour, IService
     {
         [SerializeField] private float _cameraSpeed;
-        [SerializeField] private Vector3 _offset;
-
-        private PlayerStats _playerStats;
+        [field: SerializeField] public Vector3 Offset { get; set; } = Vector3.zero;
+        public Transform Target { get; set; } = null;
 
         private void Awake()
         {
-            _playerStats = ServiceLocator.Instance.Get<PlayerStats>();
+            ServiceLocator.Instance.Register(this);
         }
 
         private void Update()
         {
-            transform.position = Vector3.MoveTowards(transform.position, _playerStats.Player.position + _offset, _cameraSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, Target.position + Offset, _cameraSpeed * Time.deltaTime);
         }
     }
 }

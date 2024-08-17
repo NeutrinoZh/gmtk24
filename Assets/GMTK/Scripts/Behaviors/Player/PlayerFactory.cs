@@ -15,6 +15,11 @@ namespace GMTK
         {
             _playerStats = ServiceLocator.Instance.Get<PlayerStats>();
             CreatePlayer();
+        }
+
+        private void Start()
+        {
+            ServiceLocator.Instance.Get<CameraFollow>().Target = _playerStats.Player;
             Destroy(gameObject);
         }
 
@@ -23,7 +28,6 @@ namespace GMTK
             var instance = Instantiate(_playerPrefab);
             _playerStats.Player = instance;
         }
-
 
     }
 }
