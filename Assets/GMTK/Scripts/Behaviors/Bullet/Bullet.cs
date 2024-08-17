@@ -8,6 +8,7 @@ namespace GMTK
     {
         [SerializeField] private float _speed;
         [SerializeField] private float _bulletLifetime;
+        [SerializeField] private int _damage;
 
         private BulletManager _bulletManager;
 
@@ -26,11 +27,11 @@ namespace GMTK
             StartCoroutine(BulletDestroyByDelay());
         }
 
-        private void OnCollisionEnter2D(Collision2D other)
+        private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.TryGetComponent(out IDamageable damageable))
             {
-                damageable.Damage(1);
+                damageable.Damage(_damage);
                 _bulletManager.DestroyBullet(transform);
             }
         }
