@@ -28,5 +28,13 @@ namespace GMTK
 
             return nearestObject;
         }
+
+        public void AddObject(Transform _object)
+        {
+            if (_objects.Contains(_object))
+                return;
+
+            _objects.Add(_object);
+        }
     }
 }

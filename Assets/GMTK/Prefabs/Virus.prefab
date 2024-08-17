@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _friction: 0.02
-  _speed: 1
+  _speed: 2
   _acceleration: 0.5
   _angularFriction: 0.8
   _angularSpeed: 80

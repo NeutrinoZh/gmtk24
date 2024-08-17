@@ -17,8 +17,12 @@ namespace GMTK
             _target = _cellManager.FindNearToPoint(transform.position);
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
+            var direction = _target.position - transform.position;
+            float product = transform.right.x * direction.y - transform.right.y * direction.x;
+
+            _body.Rotate(Mathf.Sign(product));
             _body.Move(1f);
         }
     }

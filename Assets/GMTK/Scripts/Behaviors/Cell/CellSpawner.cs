@@ -12,11 +12,12 @@ namespace GMTK
         [SerializeField] private float _cellCount;
         [SerializeField] private Bounds _spawnBounds;
 
+        private CellManager _cellManager;
 
         private void Awake()
         {
-            var manager = transform.AddComponent<CellManager>();
-            ServiceLocator.Instance.Register(manager);
+            _cellManager = transform.AddComponent<CellManager>();
+            ServiceLocator.Instance.Register(_cellManager);
 
             for (int i = 0; i < _cellCount; ++i)
                 SpawnCell();
@@ -32,6 +33,8 @@ namespace GMTK
 
             var cell = Instantiate(_cellPrefab, transform);
             cell.SetPositionAndRotation(position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+
+            _cellManager.AddObject(cell);
         }
     }
 }
