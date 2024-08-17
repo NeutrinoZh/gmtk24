@@ -393,7 +393,7 @@ Transform:
   m_GameObject: {fileID: 2014929628}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.3940664, y: 0.17789075, z: -0.052100502}
+  m_LocalPosition: {x: -0.3940664, y: 0.17789075, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -461,7 +461,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletPrefab: {fileID: 4027225237774687317, guid: 1f761797de14c9a49bbd3e5641999789, type: 3}
-  _bulletLifetime: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

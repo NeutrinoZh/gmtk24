@@ -6,6 +6,7 @@ namespace GMTK
     public class VirusController : MonoBehaviour, IDamageable
     {
         private CellManager _cellManager;
+        private VirusManager _virusManager;
 
         private DriftMovableObject _body;
         private Transform _target;
@@ -15,6 +16,8 @@ namespace GMTK
             _body = GetComponent<DriftMovableObject>();
             _cellManager = ServiceLocator.Instance.Get<CellManager>();
             _target = _cellManager.FindNearToPoint(transform.position);
+
+            _virusManager = ServiceLocator.Instance.Get<VirusManager>();
         }
 
         private void FixedUpdate()
@@ -28,6 +31,7 @@ namespace GMTK
 
         void IDamageable.Damage(int damage)
         {
+            _virusManager.RemoveObject(transform);
             Destroy(gameObject);
         }
     }
