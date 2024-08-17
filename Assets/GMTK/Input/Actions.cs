@@ -96,6 +96,34 @@ namespace GMTK
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""PlayerTurret"",
+            ""id"": ""0c94d8b7-d505-4ed1-b8dd-f0aa76a7aa42"",
+            ""actions"": [
+                {
+                    ""name"": ""Pointer"",
+                    ""type"": ""Value"",
+                    ""id"": ""5497c5c2-1abf-422c-ac5b-bc778c7ce934"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""e6e2c81f-bb45-49c9-bd13-20e48cab6248"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pointer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -103,6 +131,9 @@ namespace GMTK
             // PlayerBody
             m_PlayerBody = asset.FindActionMap("PlayerBody", throwIfNotFound: true);
             m_PlayerBody_Move = m_PlayerBody.FindAction("Move", throwIfNotFound: true);
+            // PlayerTurret
+            m_PlayerTurret = asset.FindActionMap("PlayerTurret", throwIfNotFound: true);
+            m_PlayerTurret_Pointer = m_PlayerTurret.FindAction("Pointer", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -206,9 +237,59 @@ namespace GMTK
             }
         }
         public PlayerBodyActions @PlayerBody => new PlayerBodyActions(this);
+
+        // PlayerTurret
+        private readonly InputActionMap m_PlayerTurret;
+        private List<IPlayerTurretActions> m_PlayerTurretActionsCallbackInterfaces = new List<IPlayerTurretActions>();
+        private readonly InputAction m_PlayerTurret_Pointer;
+        public struct PlayerTurretActions
+        {
+            private @Actions m_Wrapper;
+            public PlayerTurretActions(@Actions wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Pointer => m_Wrapper.m_PlayerTurret_Pointer;
+            public InputActionMap Get() { return m_Wrapper.m_PlayerTurret; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(PlayerTurretActions set) { return set.Get(); }
+            public void AddCallbacks(IPlayerTurretActions instance)
+            {
+                if (instance == null || m_Wrapper.m_PlayerTurretActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_PlayerTurretActionsCallbackInterfaces.Add(instance);
+                @Pointer.started += instance.OnPointer;
+                @Pointer.performed += instance.OnPointer;
+                @Pointer.canceled += instance.OnPointer;
+            }
+
+            private void UnregisterCallbacks(IPlayerTurretActions instance)
+            {
+                @Pointer.started -= instance.OnPointer;
+                @Pointer.performed -= instance.OnPointer;
+                @Pointer.canceled -= instance.OnPointer;
+            }
+
+            public void RemoveCallbacks(IPlayerTurretActions instance)
+            {
+                if (m_Wrapper.m_PlayerTurretActionsCallbackInterfaces.Remove(instance))
+                    UnregisterCallbacks(instance);
+            }
+
+            public void SetCallbacks(IPlayerTurretActions instance)
+            {
+                foreach (var item in m_Wrapper.m_PlayerTurretActionsCallbackInterfaces)
+                    UnregisterCallbacks(item);
+                m_Wrapper.m_PlayerTurretActionsCallbackInterfaces.Clear();
+                AddCallbacks(instance);
+            }
+        }
+        public PlayerTurretActions @PlayerTurret => new PlayerTurretActions(this);
         public interface IPlayerBodyActions
         {
             void OnMove(InputAction.CallbackContext context);
+        }
+        public interface IPlayerTurretActions
+        {
+            void OnPointer(InputAction.CallbackContext context);
         }
     }
 }

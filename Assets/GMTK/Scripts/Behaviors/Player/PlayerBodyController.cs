@@ -29,7 +29,7 @@ namespace GMTK
             transform.Rotate(0, 0, Time.deltaTime * _angularVelocity);
 
 #if UNITY_EDITOR
-            Debug.DrawLine(transform.position, transform.position + _velocity, Color.red);
+            Debug.DrawLine(transform.position, transform.position + _velocity, Color.green);
             Debug.DrawLine(transform.position, transform.position + transform.right);
 #endif
         }

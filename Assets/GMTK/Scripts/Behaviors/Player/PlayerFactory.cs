@@ -5,6 +5,9 @@ namespace GMTK
 {
     public class PlayerFactory : MonoBehaviour
     {
+        public const string k_bodyName = "Body";
+        public const string k_turretName = "Turret";
+
         [SerializeField] private Transform _playerPrefab;
         private PlayerStats _playerStats;
 
