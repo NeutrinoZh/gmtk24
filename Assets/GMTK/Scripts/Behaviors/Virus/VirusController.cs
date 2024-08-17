@@ -12,6 +12,8 @@ namespace GMTK
 
         private VirusStats _virusStats;
 
+        private VirusStats _virusStats;
+
         private DriftMovableObject _body;
         private Transform _target;
 
@@ -42,6 +44,7 @@ namespace GMTK
         {
             if (currentHealth <= 0)
             {
+                _virusManager.RemoveObject(transform);
                 _virusManager.RemoveObject(transform);
                 Destroy(gameObject);
             }
