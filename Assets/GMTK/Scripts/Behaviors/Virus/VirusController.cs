@@ -12,8 +12,6 @@ namespace GMTK
 
         private VirusStats _virusStats;
 
-        private VirusStats _virusStats;
-
         private DriftMovableObject _body;
         private Transform _target;
 
