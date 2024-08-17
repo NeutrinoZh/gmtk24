@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 3702454742064651654}
   - component: {fileID: 3998560497418552643}
   - component: {fileID: 3351598901347282491}
+  - component: {fileID: 4635780882642124793}
   - component: {fileID: 6840762720480993118}
   - component: {fileID: 26103826933667892}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Virus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,6 +119,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40e1111841f6bde4db3b4f86583ef695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4635780882642124793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4564788998329093073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f4cb9518e3ddb79cbed36841d907548, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 5
+  <DelayBeforePenetration>k__BackingField: 5
 --- !u!50 &6840762720480993118
 Rigidbody2D:
   serializedVersion: 4
@@ -174,19 +189,19 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.003709823, y: 0.054849505}
+  m_Offset: {x: -0.007474661, y: 0.04366514}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.4169922, y: 1.3642578}
+    oldSize: {x: 1.4160156, y: 1.3632812}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.1174846, y: 1.1769836}
+  m_Size: {x: 0.9340596, y: 0.94882065}
   m_EdgeRadius: 0

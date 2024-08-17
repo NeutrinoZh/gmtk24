@@ -59,6 +59,7 @@
     "dotnet.defaultSolution": "gmtk24.sln",
     "cSpell.words": [
         "GMTK",
-        "Mathf"
+        "Mathf",
+        "Tweening"
     ]
 }
