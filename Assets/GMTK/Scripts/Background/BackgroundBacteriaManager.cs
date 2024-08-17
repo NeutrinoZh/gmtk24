@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GMTK 
+namespace GMTK
 {
     public class BackgroundBacteriaManager : MonoBehaviour
     {
@@ -15,28 +15,28 @@ namespace GMTK
         private readonly List<BackgroundBacteria> _bacterias;
         private List<Vector2> _allDestinations;
 
-        private void Start() 
+        private void Start()
         {
             _allDestinations = new();
             InitList();
         }
 
-        private void InitList() 
+        private void InitList()
         {
-            for (int i = 0; i < _startBacteriaCount; ++i) 
+            for (int i = 0; i < _startBacteriaCount; ++i)
             {
                 int randomBacteriaIndex = Random.Range(0, _prefabs.Count);
-                BackgroundBacteria backgroundBacteria = Instantiate(_prefabs[randomBacteriaIndex]);
+                BackgroundBacteria backgroundBacteria = Instantiate(_prefabs[randomBacteriaIndex], transform);
                 backgroundBacteria.Init(GetRandomDestinationList());
             }
         }
-        private List<Vector2> GetRandomDestinationList() 
+        private List<Vector2> GetRandomDestinationList()
         {
             List<Vector2> destinationList = new List<Vector2>();
 
             for (int i = 0; i < _destinationsCount; i++)
             {
-                while (true) 
+                while (true)
                 {
                     var pos = new Vector2(Random.Range(_bounds.min.x, _bounds.max.x), Random.Range(_bounds.min.y, _bounds.max.y));
 
@@ -50,7 +50,7 @@ namespace GMTK
                             break;
                         }
                     }
-                    
+
                     if (!isCongruentWithOtherDestinations) continue;
                     destinationList.Add(pos);
                     _allDestinations.Add(pos);
@@ -60,7 +60,7 @@ namespace GMTK
             return destinationList;
         }
 
-        void OnDrawGizmos() 
+        void OnDrawGizmos()
         {
             if (_allDestinations == null) return;
 
