@@ -9,7 +9,6 @@ namespace GMTK
         private ReadOnlyCollection<Vector2> _destinationsList;
         [SerializeField] private Vector2 _currentDestination;
         [SerializeField] private Vector2 _previousDestination;
-        [SerializeField] private int _destinationsCount = 3;
         [SerializeField] private float _maxProgress = 5;
         private bool _isInitialized = false;
         private float _currentProgress;
@@ -35,21 +34,12 @@ namespace GMTK
             _currentDestination = _destinationsList[index < _destinationsList.Count - 1 ? ++index : 0];
         }
 
-        public void Init(Bounds bounds) 
+        public void Init(List<Vector2> destinationLists) 
         {
             _currentProgress = 0;
-
-            var list = new List<Vector2>();
-
-            for (int i = 0; i < _destinationsCount; i++)
-            {
-                list.Add(new Vector2(Random.Range(bounds.min.x, bounds.max.x), Random.Range(bounds.min.y, bounds.max.y)));
-            }
-
-            _destinationsList = list.AsReadOnly();
-
-            transform.position.Set(list[0].x, list[0].y, 0);
-            SetNewDestination(list[0]);
+            _destinationsList = destinationLists.AsReadOnly();
+            transform.position.Set(_destinationsList[0].x, _destinationsList[0].y, 0);
+            SetNewDestination(_destinationsList[0]);
             _isInitialized = true;
         }
     }
