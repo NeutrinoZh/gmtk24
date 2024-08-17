@@ -13,7 +13,6 @@ namespace GMTK.GameStates
         public GamePlayState(GameStateManager stateManager) { }
 
         private WorldState _worldState = WorldState.MACRO_WORLD;
-        private bool _isTransition;
         private VirusManager _virusManager;
 
         public WorldState State
@@ -26,13 +25,11 @@ namespace GMTK.GameStates
                 if (value == _worldState)
                     return;
 
-                _isTransition = true;
-
                 if (value == WorldState.MICRO_WORLD)
                     TransitionIntoMicroWorld();
 
                 if (value == WorldState.MACRO_WORLD)
-                    EnterIntoMacroWorld();
+                    TransitionIntoMacroWorld();
 
                 _worldState = value;
             }
@@ -42,18 +39,18 @@ namespace GMTK.GameStates
         {
             new TransitionIntoMicroWorld()
                 .Start(this);
-        }
 
-        private void EnterIntoMacroWorld()
-        {
-            foreach (var virus in _virusManager.Pool)
-                virus.gameObject.SetActive(true);
-        }
-
-        public void EnterIntoMicroWorld()
-        {
             foreach (var virus in _virusManager.Pool)
                 virus.gameObject.SetActive(false);
+        }
+
+        private void TransitionIntoMacroWorld()
+        {
+            new TransitionIntoMacroWorld()
+                .Start(this);
+
+            foreach (var virus in _virusManager.Pool)
+                virus.gameObject.SetActive(true);
         }
 
         void IState.Enter()

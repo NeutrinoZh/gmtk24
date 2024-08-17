@@ -36,6 +36,9 @@ namespace GMTK.UI
 
         private void Update()
         {
+            if (_gamePlayState.State != WorldState.MACRO_WORLD)
+                return;
+
             var nearestCell = _cellManager.FindNearToPoint(_playerStats.Player.position, out float sqrDistance);
             if (sqrDistance < _distanceToActivate)
             {
@@ -48,14 +51,14 @@ namespace GMTK.UI
 
         private void OnPlayerPenetration(InputAction.CallbackContext context)
         {
-            if (!_canvas.activeSelf)
-            {
-                _gamePlayState.State = WorldState.MACRO_WORLD;
-            }
-            else
+            if (_canvas.activeSelf)
             {
                 _canvas.SetActive(false);
                 _gamePlayState.State = WorldState.MICRO_WORLD;
+            }
+            else
+            {
+                _gamePlayState.State = WorldState.MACRO_WORLD;
             }
         }
     }

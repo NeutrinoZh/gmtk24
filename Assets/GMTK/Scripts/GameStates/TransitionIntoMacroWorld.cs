@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace GMTK.GameStates
 {
-    public class TransitionIntoMicroWorld
+    public class TransitionIntoMacroWorld
     {
         private const float k_transitionDirection = 1f;
 
@@ -19,48 +19,47 @@ namespace GMTK.GameStates
             var nearestCell = ServiceLocator.Instance.Get<CellManager>().FindNearToPoint(_player.position);
 
             _player.GetComponent<DriftMovableObject>().Stop();
-            _player.GetComponent<BoxCollider2D>().isTrigger = true;
-            nearestCell.GetComponent<Rigidbody2D>().isKinematic = true;
+            nearestCell.GetComponent<Rigidbody2D>().isKinematic = false;
 
-            ServiceLocator.Instance.Get<PlayerStats>().Speed = 0.01f;
+            ServiceLocator.Instance.Get<PlayerStats>().Speed = 1f;
 
-            _camera.Target = nearestCell;
+            _camera.Target = _player;
 
-            var insidePosition = _player.position + (nearestCell.position - _player.position) / 2;
+            var outsidePosition = _player.position + _player.right * 5;
 
             DOTween.To(
                 () => _player.transform.localScale,
                 scale => _player.localScale = scale,
-                new Vector3(0.3f, 0.3f, 1),
+                new Vector3(1, 1, 1),
                 k_transitionDirection
             );
 
             DOTween.To(
                 () => Camera.main.orthographicSize,
                 size => Camera.main.orthographicSize = size,
-                1.9f,
+                5f,
                 k_transitionDirection
             );
 
             DOTween.To(
                 () => _camera.transform.rotation.z,
                 angle => _camera.transform.rotation = new Quaternion(_camera.transform.rotation.x, _camera.transform.rotation.y, angle, _camera.transform.rotation.w),
-                nearestCell.rotation.z,
+                0,
                 k_transitionDirection
             );
 
             DOTween.To(
                () => _player.position,
                position => _player.position = position,
-               insidePosition,
+               outsidePosition,
                k_transitionDirection
            ).OnComplete(() =>
            {
-               _player.gameObject.layer = LayerMask.NameToLayer("InsideCell");
+               _player.gameObject.layer = LayerMask.NameToLayer("Default");
                _player.GetComponent<BoxCollider2D>().isTrigger = false;
                _player.GetComponent<Rigidbody2D>().isKinematic = false;
 
-               ServiceLocator.Instance.Get<HUD>().AdviceGetOutSet(true);
+               ServiceLocator.Instance.Get<HUD>().AdviceGetOutSet(false);
            });
         }
 
