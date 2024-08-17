@@ -6,14 +6,20 @@ namespace GMTK
 {
     public class PlayerTurretController : MonoBehaviour
     {
+        public bool AbleToShoot => _currentReloadTime <= 0;
+
+        [SerializeField] private float _reloadTime = 0.625f;
+        private float _currentReloadTime;
+
         private InputController _input;
         private BulletManager _bulletManager;
-
         private Transform _turret;
         private Transform _bulletSpawnPoint;
 
         private void Start()
         {
+            _currentReloadTime = 0;
+
             _input = ServiceLocator.Instance.Get<InputController>();
             _bulletManager = ServiceLocator.Instance.Get<BulletManager>();
 
@@ -25,6 +31,11 @@ namespace GMTK
 
         private void Update()
         {
+            if (!AbleToShoot) 
+            {
+                _currentReloadTime -= Time.deltaTime;
+            }
+
             var screenPosition = (Vector3)_input.Actions.PlayerTurret.Pointer.ReadValue<Vector2>();
             var worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
 
@@ -40,7 +51,14 @@ namespace GMTK
 
         private void Fire(InputAction.CallbackContext ctx)
         {
+            if (!AbleToShoot) {
+                // Debug.LogWarning($"Unable to shoot while cooldown is active!");
+                return;
+            }
+
             _bulletManager.SpawnBullet(_bulletSpawnPoint.position, _turret.right);
+            _currentReloadTime = _reloadTime;
+            // Debug.Log($"Bullet was spawned! Shoot!");
         }
     }
 }

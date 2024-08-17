@@ -36,7 +36,7 @@ namespace GMTK
 
         private void Update()
         {
-            if (!_isActive) return;
+            if (!_isActive || _target == null) return;
 
             SetArrowDirection();
         }
@@ -48,15 +48,7 @@ namespace GMTK
 
         private void SetArrowDirection()
         {
-            transform.rotation = Quaternion.Euler(0, 0, CalculateZRotation());
-        }
-
-        private float CalculateZRotation()
-        {
-            Vector2 direction = (_target.position - transform.position).normalized;
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-            return angle;
+            transform.right = (_target.position - transform.position).normalized;
         }
     }
 }

@@ -17,7 +17,11 @@ namespace GMTK
         private void FindTarget()
         {
             var targetPosition = _arrow.FindTargetPosition();
-            if (targetPosition == null) return;
+            if (targetPosition == null)
+            {
+                _arrow.SetArrowState(false);
+                return;
+            }
 
             var isTargetInCamera = CheckTargetPosition(targetPosition);
 
