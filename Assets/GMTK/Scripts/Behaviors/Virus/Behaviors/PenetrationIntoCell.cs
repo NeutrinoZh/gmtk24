@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using GMTK.Services;
 
 namespace GMTK.VirusBehaviors
 {
@@ -32,6 +33,7 @@ namespace GMTK.VirusBehaviors
 
         private void OnAnimationEnd()
         {
+            ServiceLocator.Instance.Get<VirusManager>().RemoveObject(_transform);
             Object.Destroy(_transform.gameObject);
         }
 
