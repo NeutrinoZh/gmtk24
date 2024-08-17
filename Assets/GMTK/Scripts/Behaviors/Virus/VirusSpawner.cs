@@ -12,10 +12,12 @@ namespace GMTK
         [SerializeField] private float _virusCount;
         [SerializeField] private Bounds _spawnBounds;
 
+        private VirusManager _virusManager;
+
         private void Awake()
         {
-            var manager = transform.AddComponent<VirusManager>();
-            ServiceLocator.Instance.Register(manager);
+            _virusManager = transform.AddComponent<VirusManager>();
+            ServiceLocator.Instance.Register(_virusManager);
 
             for (int i = 0; i < _virusCount; ++i)
                 SpawnVirus();
@@ -31,6 +33,8 @@ namespace GMTK
 
             var virus = Instantiate(_virusPrefab, transform);
             virus.SetPositionAndRotation(position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+
+            _virusManager.AddObject(virus);
         }
     }
 }

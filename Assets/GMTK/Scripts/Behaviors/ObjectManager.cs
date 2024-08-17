@@ -1,4 +1,5 @@
 using GMTK.Services;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
@@ -7,6 +8,8 @@ namespace GMTK
 {
     public class ObjectManager : MonoBehaviour, IService
     {
+        public Action OnObjectRemoved;
+
         private readonly List<Transform> _objects = new();
 
         public ReadOnlyCollection<Transform> Pool => _objects.AsReadOnly();
@@ -35,6 +38,15 @@ namespace GMTK
                 return;
 
             _objects.Add(_object);
+        }
+
+        public void RemoveObject(Transform _object)
+        {
+            if (!_objects.Contains(_object))
+                return;
+
+            _objects.Remove(_object);
+            OnObjectRemoved?.Invoke();
         }
     }
 }
