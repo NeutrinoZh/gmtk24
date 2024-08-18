@@ -66,7 +66,7 @@ namespace GMTK
 
             foreach (var item in _allDestinations)
             {
-                Gizmos.DrawSphere(item, 0.01f);
+                // Gizmos.DrawSphere(item, 1f);
             }
         }
     }

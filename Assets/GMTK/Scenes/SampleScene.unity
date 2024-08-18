@@ -1212,9 +1212,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cellPrefab: {fileID: 4010140487636830674, guid: a38a25f5f1589ec48983d3b4460eaf12, type: 3}
   _cellCount: 50
+  _distanceThreshold: 100
   _spawnBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 50, y: 50, z: 0}
+    m_Extent: {x: 100, y: 100, z: 0}
 --- !u!1 &2016874505
 GameObject:
   m_ObjectHideFlags: 0
@@ -1456,7 +1457,7 @@ MonoBehaviour:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 70, y: 70, z: 0}
   _destinationsCount: 4
-  _distanceThreshold: 35
+  _distanceThreshold: 80
 --- !u!4 &2136286277
 Transform:
   m_ObjectHideFlags: 0
