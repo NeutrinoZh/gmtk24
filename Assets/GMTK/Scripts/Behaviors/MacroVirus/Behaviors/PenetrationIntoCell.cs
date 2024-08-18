@@ -33,6 +33,7 @@ namespace GMTK.VirusBehaviors
 
         private void OnAnimationEnd()
         {
+            _target.GetComponent<CellController>().AddVirus();
             ServiceLocator.Instance.Get<VirusManager>().RemoveObject(_transform);
             Object.Destroy(_transform.gameObject);
         }
