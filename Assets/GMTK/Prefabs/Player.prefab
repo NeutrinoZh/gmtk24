@@ -5329,8 +5329,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c792a76bcaf6144b85d813ce27c981d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <MaxSpeed>k__BackingField: 3
   _friction: 0.02
+  _speed: 3
   _acceleration: 1
   _angularFriction: 0.8
   _angularSpeed: 80
