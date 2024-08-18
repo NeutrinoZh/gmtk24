@@ -14,7 +14,6 @@ namespace GMTK
         private float _distanceThreshold = 10f;
         [SerializeField] private float _sqrSizeOfStartZone;
 
-
         [SerializeField] private Bounds _spawnBounds;
 
         private CellManager _cellManager;

@@ -31,11 +31,8 @@ namespace GMTK
             _body.Move(inputValue.y * _playerStats.SpeedScale * backMovement);
             _body.Rotate(inputValue.x);
 
-            if (_playState.State == WorldState.MICRO_WORLD)
-            {
-                _rd.velocity = Vector3.zero;
-                _rd.angularVelocity = 0;
-            }
+            _rd.velocity = Vector3.zero;
+            _rd.angularVelocity = 0;
         }
     }
 }
