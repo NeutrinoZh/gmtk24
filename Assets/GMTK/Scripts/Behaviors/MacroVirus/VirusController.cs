@@ -62,7 +62,7 @@ namespace GMTK
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.TryGetComponent(out CellController cell))
+            if (other.gameObject.TryGetComponent(out CellController cell) && cell.IsAlive)
             {
                 ChangeBehavior(new AttackCell(cell.transform));
                 StartCoroutine(StartPenetrationAfterDelay(cell.transform));
