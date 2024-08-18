@@ -12,7 +12,7 @@ namespace GMTK
         [SerializeField] private float _cellCount;
         [SerializeField, Tooltip("Squared distance threshold between cells")]
         private float _distanceThreshold = 10f;
-        [SerializeField] private float _sizeOfStartZone;
+        [SerializeField] private float _sqrSizeOfStartZone;
 
 
         [SerializeField] private Bounds _spawnBounds;
@@ -40,6 +40,9 @@ namespace GMTK
                     0
                 );
 
+                if (position.sqrMagnitude < _sqrSizeOfStartZone)
+                    continue;
+
                 bool isCongruentWithOtherDestinations = true;
 
                 foreach (var existingCell in _cellManager.Pool)
@@ -51,7 +54,9 @@ namespace GMTK
                     }
                 }
 
-                if (!isCongruentWithOtherDestinations) continue;
+                if (!isCongruentWithOtherDestinations)
+                    continue;
+
                 break;
             }
 

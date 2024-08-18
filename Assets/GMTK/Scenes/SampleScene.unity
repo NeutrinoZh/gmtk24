@@ -328,7 +328,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 1000, y: 1000}
+  m_Size: {x: 40, y: 40}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -640,7 +640,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 1000, y: 1000}
+  m_Size: {x: 40, y: 40}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1014,7 +1014,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 1000, y: 1000}
+  m_Size: {x: 40, y: 40}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1975,9 +1975,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cellPrefab: {fileID: 4010140487636830674, guid: a38a25f5f1589ec48983d3b4460eaf12, type: 3}
-  _cellCount: 1
+  _cellCount: 40
   _distanceThreshold: 30
-  _sizeOfStartZone: 0
+  _sqrSizeOfStartZone: 10
   _spawnBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 30, y: 30, z: 0}
