@@ -48,7 +48,7 @@ namespace GMTK.UI
             if (!_gameOverGroup.gameObject.activeSelf)
                 return;
 
-            SceneManager.LoadScene(0);
+            ServiceLocator.Instance.Get<FadeManager>().FadeIn(() => SceneManager.LoadScene(0));
         }
     }
 }

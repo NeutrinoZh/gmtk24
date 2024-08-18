@@ -7,6 +7,8 @@ namespace GMTK
 {
     public class BackgroundBacteriaManager : MonoBehaviour
     {
+        public const int MAX_CHOICES_VALUE = 500;
+
         [SerializeField] private List<BackgroundBacteria> _prefabs;
         [SerializeField] private int _startBacteriaCount;
         [SerializeField] private Bounds _bounds;
@@ -35,6 +37,7 @@ namespace GMTK
 
             for (int i = 0; i < _destinationsCount; i++)
             {
+                int j = 0;
                 while (true)
                 {
                     var pos = new Vector2(Random.Range(_bounds.min.x, _bounds.max.x), Random.Range(_bounds.min.y, _bounds.max.y));
@@ -50,10 +53,16 @@ namespace GMTK
                         }
                     }
 
-                    if (!isCongruentWithOtherDestinations) continue;
-                    destinationList.Add(pos);
-                    _allDestinations.Add(pos);
-                    break;
+                    j++;
+
+                    if (j >= MAX_CHOICES_VALUE || isCongruentWithOtherDestinations) 
+                    {
+                        destinationList.Add(pos);
+                        _allDestinations.Add(pos);
+                        break;
+                    }
+                    else if (!isCongruentWithOtherDestinations)
+                        continue;
                 }
             }
             return destinationList;
