@@ -288,6 +288,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd8f551e204a2440ad1afa41177d26a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _macroWorldSprite: {fileID: 21300000, guid: 00b85ed24aea32c47a687264d3e37167, type: 3}
+  _microWorldSprite: {fileID: 21300000, guid: 512b1d37afac64347bc8470f7a1dea6f, type: 3}
 --- !u!1 &6982717816105472258
 GameObject:
   m_ObjectHideFlags: 0
