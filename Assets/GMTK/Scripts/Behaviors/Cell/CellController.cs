@@ -12,7 +12,7 @@ namespace GMTK
         [SerializeField] private Sprite _microWorldSprite;
         [SerializeField] private Bounds _entrailsArea;
         [SerializeField] private Vector2 _maxVelocity;
-        private CellStats _cellStats;
+
         private SpriteRenderer _spriteRenderer;
         private InCellViruses _virusManager;
         private Rigidbody2D _rb;
@@ -20,9 +20,6 @@ namespace GMTK
 
         private void Start()
         {
-            _cellStats = GetComponent<CellStats>();
-            _cellStats.Init();
-
             _rb = GetComponent<Rigidbody2D>();
             _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
             _virusManager = GetComponentInChildren<InCellViruses>(true);
@@ -35,13 +32,13 @@ namespace GMTK
             _virusCount += 2;
         }
 
-        public void SetVelocity(WorldState state) 
+        public void SetVelocity(WorldState state)
         {
-            switch (state) 
+            switch (state)
             {
                 case WorldState.MACRO_WORLD:
                     _rb.drag = 0f;
-                    _rb.velocity = new Vector3(Random.Range(-_maxVelocity.x, _maxVelocity.x),Random.Range(-_maxVelocity.y, _maxVelocity.y),0);
+                    _rb.velocity = new Vector3(Random.Range(-_maxVelocity.x, _maxVelocity.x), Random.Range(-_maxVelocity.y, _maxVelocity.y), 0);
                     break;
                 case WorldState.MICRO_WORLD:
                     _rb.drag = 10f;
@@ -51,7 +48,7 @@ namespace GMTK
                     throw new ArgumentOutOfRangeException();
             }
         }
-        
+
         public void SetMacroSprite()
         {
             _spriteRenderer.sprite = _macroWorldSprite;
