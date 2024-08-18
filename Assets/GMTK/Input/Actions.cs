@@ -172,6 +172,34 @@ namespace GMTK
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""GameOver"",
+            ""id"": ""fdc67e28-7208-46c1-9415-37ff97cafe13"",
+            ""actions"": [
+                {
+                    ""name"": ""AnyKey"",
+                    ""type"": ""Button"",
+                    ""id"": ""13859336-fe79-41a9-bb11-a50bbf183e71"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""8df92aa4-7428-4a94-b3d5-5b990d85651a"",
+                    ""path"": ""<Keyboard>/anyKey"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AnyKey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -186,6 +214,9 @@ namespace GMTK
             // PlayerPenetration
             m_PlayerPenetration = asset.FindActionMap("PlayerPenetration", throwIfNotFound: true);
             m_PlayerPenetration_Penetration = m_PlayerPenetration.FindAction("Penetration", throwIfNotFound: true);
+            // GameOver
+            m_GameOver = asset.FindActionMap("GameOver", throwIfNotFound: true);
+            m_GameOver_AnyKey = m_GameOver.FindAction("AnyKey", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -389,6 +420,52 @@ namespace GMTK
             }
         }
         public PlayerPenetrationActions @PlayerPenetration => new PlayerPenetrationActions(this);
+
+        // GameOver
+        private readonly InputActionMap m_GameOver;
+        private List<IGameOverActions> m_GameOverActionsCallbackInterfaces = new List<IGameOverActions>();
+        private readonly InputAction m_GameOver_AnyKey;
+        public struct GameOverActions
+        {
+            private @Actions m_Wrapper;
+            public GameOverActions(@Actions wrapper) { m_Wrapper = wrapper; }
+            public InputAction @AnyKey => m_Wrapper.m_GameOver_AnyKey;
+            public InputActionMap Get() { return m_Wrapper.m_GameOver; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(GameOverActions set) { return set.Get(); }
+            public void AddCallbacks(IGameOverActions instance)
+            {
+                if (instance == null || m_Wrapper.m_GameOverActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_GameOverActionsCallbackInterfaces.Add(instance);
+                @AnyKey.started += instance.OnAnyKey;
+                @AnyKey.performed += instance.OnAnyKey;
+                @AnyKey.canceled += instance.OnAnyKey;
+            }
+
+            private void UnregisterCallbacks(IGameOverActions instance)
+            {
+                @AnyKey.started -= instance.OnAnyKey;
+                @AnyKey.performed -= instance.OnAnyKey;
+                @AnyKey.canceled -= instance.OnAnyKey;
+            }
+
+            public void RemoveCallbacks(IGameOverActions instance)
+            {
+                if (m_Wrapper.m_GameOverActionsCallbackInterfaces.Remove(instance))
+                    UnregisterCallbacks(instance);
+            }
+
+            public void SetCallbacks(IGameOverActions instance)
+            {
+                foreach (var item in m_Wrapper.m_GameOverActionsCallbackInterfaces)
+                    UnregisterCallbacks(item);
+                m_Wrapper.m_GameOverActionsCallbackInterfaces.Clear();
+                AddCallbacks(instance);
+            }
+        }
+        public GameOverActions @GameOver => new GameOverActions(this);
         public interface IPlayerBodyActions
         {
             void OnMove(InputAction.CallbackContext context);
@@ -401,6 +478,10 @@ namespace GMTK
         public interface IPlayerPenetrationActions
         {
             void OnPenetration(InputAction.CallbackContext context);
+        }
+        public interface IGameOverActions
+        {
+            void OnAnyKey(InputAction.CallbackContext context);
         }
     }
 }

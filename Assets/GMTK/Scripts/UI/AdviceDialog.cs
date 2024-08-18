@@ -34,6 +34,11 @@ namespace GMTK.UI
             _gamePlayState = ServiceLocator.Instance.Get<GamePlayState>();
         }
 
+        private void OnDestroy()
+        {
+            _input.Actions.PlayerPenetration.Penetration.performed -= OnPlayerPenetration;
+        }
+
         private void Update()
         {
             if (_playerStats.Player == null)
