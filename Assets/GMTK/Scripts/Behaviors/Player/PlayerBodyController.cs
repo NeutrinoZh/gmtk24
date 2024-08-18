@@ -19,8 +19,9 @@ namespace GMTK
         private void FixedUpdate()
         {
             var inputValue = _input.Actions.PlayerBody.Move.ReadValue<Vector2>();
+            var backMovement = inputValue.y < 0 ? 0.05f : 1f;
 
-            _body.Move(inputValue.y * _playerStats.Speed);
+            _body.Move(inputValue.y * _playerStats.Speed * backMovement);
             _body.Rotate(inputValue.x);
         }
     }
