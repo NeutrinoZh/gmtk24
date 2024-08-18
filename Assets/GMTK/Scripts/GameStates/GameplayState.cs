@@ -1,4 +1,5 @@
 using GMTK.Services;
+using System;
 
 namespace GMTK.GameStates
 {
@@ -11,6 +12,7 @@ namespace GMTK.GameStates
     public class GamePlayState : IState, IService
     {
         public GamePlayState(GameStateManager stateManager) { }
+        public Action<WorldState> OnWorldChanged;
 
         private WorldState _worldState = WorldState.MACRO_WORLD;
         private VirusManager _virusManager;
@@ -32,6 +34,7 @@ namespace GMTK.GameStates
                     TransitionIntoMacroWorld();
 
                 _worldState = value;
+                OnWorldChanged?.Invoke(value);
             }
         }
 
