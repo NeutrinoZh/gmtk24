@@ -1,6 +1,11 @@
+using DG.Tweening;
 using GMTK.GameStates;
 using GMTK.MicroViruses;
+using GMTK.Services;
+using GMTK.UI;
 using System;
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -8,28 +13,90 @@ namespace GMTK
 {
     public class CellController : MonoBehaviour
     {
-        [SerializeField] private Sprite _macroWorldSprite;
-        [SerializeField] private Sprite _microWorldSprite;
+        private const float k_poisonCoroutineTimeStep = 1f;
+
+        [SerializeField] private Texture _macroWorldSprite;
+        [SerializeField] private Sprite _macroWorldBadSprite;
+        [SerializeField] private Texture _microWorldSprite;
+        [SerializeField] private Sprite _microWorldBadSprite;
+
         [SerializeField] private Bounds _entrailsArea;
         [SerializeField] private Vector2 _maxVelocity;
 
         private SpriteRenderer _spriteRenderer;
-        private InCellViruses _virusManager;
+        private Animator _animator;
+        private InCellViruses _inCellVirusManager;
+        private VirusSpawner _virusSpawner;
+        private CellManager _cellManager;
         private Rigidbody2D _rb;
         private int _virusCount = 0;
+
+        private float _health = 100f;
+
+        public bool IsAlive => _health > 0;
 
         private void Start()
         {
             _rb = GetComponent<Rigidbody2D>();
+            _animator = GetComponent<Animator>();
             _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-            _virusManager = GetComponentInChildren<InCellViruses>(true);
+            _inCellVirusManager = GetComponentInChildren<InCellViruses>(true);
+            _cellManager = ServiceLocator.Instance.Get<CellManager>();
+            _virusSpawner = ServiceLocator.Instance.Get<VirusSpawner>();
 
             SetVelocity(WorldState.MACRO_WORLD);
+
+            _spriteRenderer.material.SetFloat("_Blend", 1f);
+            StartCoroutine(PoisonCoroutine());
         }
 
         public void AddVirus()
         {
-            _virusCount += 2;
+            _virusCount += 1;
+        }
+
+        private IEnumerator PoisonCoroutine()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(k_poisonCoroutineTimeStep);
+
+                _health -= _virusCount;
+
+                if (_health <= 0)
+                {
+                    Die();
+                    yield break;
+                }
+
+                DOTween.To(
+                    () => _spriteRenderer.material.GetFloat("_Blend"),
+                    blend => _spriteRenderer.material.SetFloat("_Blend", blend),
+                    _health / 100,
+                    k_poisonCoroutineTimeStep
+                );
+            }
+        }
+
+        private void Die()
+        {
+            _cellManager.RemoveObject(transform);
+            Destroy(gameObject, 2f);
+
+            _animator.Play("Base Layer.Dead");
+
+            if (_cellManager.Pool.Count == 0)
+                ServiceLocator.Instance.Get<HUD>().GameOverGroup(true);
+            else
+                StartCoroutine(SpawnVirusesByDelay());
+        }
+
+        private IEnumerator SpawnVirusesByDelay()
+        {
+            yield return new WaitForSeconds(1f);
+
+            for (int i = 0; i < _virusCount + 1; ++i)
+                _virusSpawner.SpawnVirus(transform.position);
         }
 
         public void SetVelocity(WorldState state)
@@ -51,16 +118,20 @@ namespace GMTK
 
         public void SetMacroSprite()
         {
-            _spriteRenderer.sprite = _macroWorldSprite;
+            _spriteRenderer.sprite = _macroWorldBadSprite;
+            _spriteRenderer.material.SetTexture("_SecondaryTex", _macroWorldSprite);
+
             transform.GetChild(0).gameObject.SetActive(false);
         }
 
         public void SetMicroSprite()
         {
-            _spriteRenderer.sprite = _microWorldSprite;
+            _spriteRenderer.sprite = _microWorldBadSprite;
+            _spriteRenderer.material.SetTexture("_SecondaryTex", _microWorldSprite);
+
             transform.GetChild(0).gameObject.SetActive(true);
             ShuffleEntrails();
-            _virusManager.SetVirusesCount(_virusCount);
+            _inCellVirusManager.SetVirusesCount(_virusCount);
         }
 
         public void ShuffleEntrails()

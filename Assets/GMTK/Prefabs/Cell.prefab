@@ -357,6 +357,7 @@ GameObject:
   - component: {fileID: 3089290741938929314}
   - component: {fileID: 4030958730235458231}
   - component: {fileID: 6447975583405041474}
+  - component: {fileID: 4525280840446699477}
   m_Layer: 10
   m_Name: Cell
   m_TagString: Untagged
@@ -421,7 +422,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 00b85ed24aea32c47a687264d3e37167, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4956d9f1eb95d744ca27f04b526ef1d4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -618,12 +619,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd8f551e204a2440ad1afa41177d26a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _macroWorldSprite: {fileID: 21300000, guid: 00b85ed24aea32c47a687264d3e37167, type: 3}
-  _microWorldSprite: {fileID: 21300000, guid: 512b1d37afac64347bc8470f7a1dea6f, type: 3}
+  _macroWorldSprite: {fileID: 2800000, guid: 00b85ed24aea32c47a687264d3e37167, type: 3}
+  _macroWorldBadSprite: {fileID: 21300000, guid: 4956d9f1eb95d744ca27f04b526ef1d4, type: 3}
+  _microWorldSprite: {fileID: 2800000, guid: 512b1d37afac64347bc8470f7a1dea6f, type: 3}
+  _microWorldBadSprite: {fileID: 21300000, guid: cce96867b5fecf84eae79d8f93e91d24, type: 3}
   _entrailsArea:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.4, y: 0.4, z: 0}
   _maxVelocity: {x: 0.6, y: 0.6}
+--- !u!95 &4525280840446699477
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3083464567721885813}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f04054d816cf4f34ba4721188aed6abd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3537804771441810972
 GameObject:
   m_ObjectHideFlags: 0
