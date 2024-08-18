@@ -1028,7 +1028,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1491347545013115051
 Transform:
   m_ObjectHideFlags: 0
@@ -1091,6 +1091,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbe48533ae82ac04faef615c43f8c30e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _orangePrefab: {fileID: 7466826437583407747, guid: 0183e584c89852141b0e344f8190177e, type: 3}
+  _bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 2, y: 2, z: 0}
 --- !u!1 &6982717816105472258
 GameObject:
   m_ObjectHideFlags: 0

@@ -23,7 +23,6 @@ namespace GMTK
 
             _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
             _virusManager = GetComponentInChildren<InCellViruses>(true);
-            _virusManager.SetSpawnArea(_entrailsArea);
         }
 
         public void AddVirus()
