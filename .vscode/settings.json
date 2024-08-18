@@ -4,6 +4,7 @@
     },
     "dotnet.defaultSolution": "gmtk24.sln",
     "cSpell.words": [
+        "Cooldown",
         "entrail",
         "GMTK",
         "Mathf",

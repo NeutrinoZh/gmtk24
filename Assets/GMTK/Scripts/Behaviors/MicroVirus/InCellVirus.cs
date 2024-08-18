@@ -10,14 +10,21 @@ namespace GMTK.MicroViruses
 
     public class InCellVirus : MonoBehaviour, IDamageable
     {
+
+        private const float k_attackCooldown = 2f;
+
         [SerializeField] private InCellVirusBehaviorType _type;
         [SerializeField] private Material _damageMaterial;
         [SerializeField] private int _maxHealth;
+        [SerializeField] private int _damage;
 
         private int _health;
         private VirusBehavior _virusBehavior;
         private InCellVirusManager _virusManager;
         private Animator _animator;
+
+        private float _attackTime;
+
 
         private void Awake()
         {
@@ -66,6 +73,18 @@ namespace GMTK.MicroViruses
             }
 
             StartCoroutine(AnimationOnDamage(attackDirection));
+        }
+
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            if (Time.time < _attackTime + k_attackCooldown)
+                return;
+
+            if (other.gameObject.TryGetComponent(out PlayerDamageable damageable))
+            {
+                _attackTime = Time.time;
+                damageable.Damage(_damage, transform.right);
+            }
         }
 
         private IEnumerator AnimationOnDied()

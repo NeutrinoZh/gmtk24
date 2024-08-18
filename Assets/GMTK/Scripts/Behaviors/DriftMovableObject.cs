@@ -45,5 +45,10 @@ namespace GMTK
             _velocity = Vector3.zero;
             _angularVelocity = 0;
         }
+
+        public void Impulse(Vector3 impulse)
+        {
+            _velocity += impulse;
+        }
     }
 }

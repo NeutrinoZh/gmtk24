@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 697083152541411791}
   - component: {fileID: 5153227940720375673}
+  - component: {fileID: 5762737321540400294}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -86,6 +87,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &5762737321540400294
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444443911665153621}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3843ad5265866624184a752ec77a0d3c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1800022918368489808
 GameObject:
   m_ObjectHideFlags: 0
@@ -4994,7 +5016,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.49071428, y: 0.48}
+  m_Size: {x: 6.5, y: 6.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -5251,6 +5273,7 @@ GameObject:
   - component: {fileID: 378154601459727843}
   - component: {fileID: 8636596991416723720}
   - component: {fileID: 3354424670928061302}
+  - component: {fileID: 3055584091243637312}
   - component: {fileID: 1879675957597179286}
   - component: {fileID: 7030177624050071867}
   m_Layer: 0
@@ -5335,6 +5358,20 @@ MonoBehaviour:
   _angularFriction: 0.8
   _angularSpeed: 80
   _angularAcceleration: 5
+--- !u!114 &3055584091243637312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4626583103710619316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3844214c81f06ba4bb18ea6793445ca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 5
+  _damageMaterial: {fileID: 2100000, guid: ff1c34b5819982642a8c9b8f51409db0, type: 2}
 --- !u!61 &1879675957597179286
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -36,6 +36,9 @@ namespace GMTK.UI
 
         private void Update()
         {
+            if (_playerStats.Player == null)
+                return;
+
             if (_gamePlayState.State != WorldState.MACRO_WORLD)
                 return;
 

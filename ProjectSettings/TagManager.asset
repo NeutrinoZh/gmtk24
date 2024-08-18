@@ -16,10 +16,10 @@ TagManager:
   - InsideCell
   - PostProcessing
   - Cell
+  - BulletMacro
+  - BulletMicro
   - 
-  - 
-  - 
-  - 
+  - InsideCellPlayer
   - 
   - 
   - 

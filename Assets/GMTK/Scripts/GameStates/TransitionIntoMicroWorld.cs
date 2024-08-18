@@ -60,7 +60,7 @@ namespace GMTK.GameStates
                k_transitionDirection
            ).OnComplete(() =>
            {
-               _player.gameObject.layer = LayerMask.NameToLayer("InsideCell");
+               _player.gameObject.layer = LayerMask.NameToLayer("InsideCellPlayer");
                _player.GetComponent<BoxCollider2D>().isTrigger = false;
                _player.GetComponent<Rigidbody2D>().isKinematic = false;
 
