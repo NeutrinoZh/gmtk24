@@ -15,15 +15,14 @@ namespace GMTK
         private Vector3 _velocity;
         private float _angularVelocity;
 
-        private void Update()
+        public Vector3 GetVelocity()
         {
-            transform.position += Time.deltaTime * _velocity;
-            transform.Rotate(0, 0, Time.deltaTime * _angularVelocity);
+            return _velocity;
+        }
 
-#if UNITY_EDITOR
-            Debug.DrawLine(transform.position, transform.position + _velocity, Color.green);
-            Debug.DrawLine(transform.position, transform.position + transform.right);
-#endif
+        public float GetSpeed()
+        {
+            return _speed;
         }
 
         public void Move(float direction)
@@ -49,6 +48,17 @@ namespace GMTK
         public void Impulse(Vector3 impulse)
         {
             _velocity += impulse;
+        }
+            
+        private void Update()
+        {
+            transform.position += Time.deltaTime * _velocity;
+            transform.Rotate(0, 0, Time.deltaTime * _angularVelocity);
+
+#if UNITY_EDITOR
+            Debug.DrawLine(transform.position, transform.position + _velocity, Color.green);
+            Debug.DrawLine(transform.position, transform.position + transform.right);
+#endif
         }
     }
 }

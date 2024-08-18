@@ -1,3 +1,4 @@
+using DG.Tweening.Plugins;
 using GMTK.GameStates;
 using GMTK.Services;
 using UnityEngine;
@@ -13,6 +14,8 @@ namespace GMTK
         private ParticleSystem.EmissionModule _emissionModule;
         private GamePlayState _gamePlayState;
 
+        private float _microWorldValue = 1f;
+
         private void Start()
         {
             _emissionModule = _particleSystem.emission;
@@ -22,24 +25,19 @@ namespace GMTK
             _gamePlayState.OnWorldChanged += ChangeParticle;
         }
 
+        private void Update()
+        {
+            ChangeEmission();
+        }
+
         private void ChangeParticle(WorldState worldState)
         {
-            if (worldState == WorldState.MICRO_WORLD) SetMicroWorldParticle();
-            else SetMacroWorldParticle();
+            _microWorldValue = worldState == WorldState.MICRO_WORLD ? 3f : 1f;
         }
-
-        private void SetMicroWorldParticle()
+        private void ChangeEmission()
         {
-            var main = _particleSystem.main;
-            main.startSpeed = 1f;
-            main.startLifetime = 0.25f;
-        }
-
-        private void SetMacroWorldParticle()
-        {
-            var main = _particleSystem.main;
-            main.startSpeed = 2f;
-            main.startLifetime = 0.5f;
+            _emissionModule.rateOverTime = Mathf.Lerp(_minMaxEmissionRate.x, _minMaxEmissionRate.y,
+                _bodyController.GetVelocity().magnitude / _bodyController.GetSpeed() * _microWorldValue);
         }
     }
 }
