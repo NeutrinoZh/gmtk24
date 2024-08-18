@@ -1975,7 +1975,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cellPrefab: {fileID: 4010140487636830674, guid: a38a25f5f1589ec48983d3b4460eaf12, type: 3}
-  _cellCount: 50
+  _cellCount: 1
   _distanceThreshold: 30
   _sizeOfStartZone: 0
   _spawnBounds:
