@@ -18,7 +18,9 @@ namespace GMTK.GameStates
             _player = ServiceLocator.Instance.Get<PlayerStats>().Player;
 
             var nearestCell = ServiceLocator.Instance.Get<CellManager>().FindNearToPoint(_player.position);
-            nearestCell.GetComponent<CellController>().SetMacroSprite();
+            var cellController = nearestCell.GetComponent<CellController>();
+            cellController.SetMacroSprite();
+            cellController.SetVelocity(WorldState.MACRO_WORLD);
 
             _player.GetComponent<DriftMovableObject>().Stop();
             nearestCell.GetComponent<Rigidbody2D>().isKinematic = false;
