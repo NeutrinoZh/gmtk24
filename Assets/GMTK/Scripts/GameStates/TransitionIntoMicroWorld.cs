@@ -24,7 +24,7 @@ namespace GMTK.GameStates
 
             nearestCell.GetComponent<Rigidbody2D>().isKinematic = true;
 
-            ServiceLocator.Instance.Get<PlayerStats>().Speed = 0.01f;
+            ServiceLocator.Instance.Get<PlayerStats>().SpeedScale = 0.01f;
 
             _camera.Target = nearestCell;
 

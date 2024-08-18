@@ -1,13 +1,11 @@
-using System;
 using UnityEngine;
 
 namespace GMTK
 {
     public class DriftMovableObject : MonoBehaviour
     {
-        public event Action<float> OnSpeedChanged;
-        [field:SerializeField] public float MaxSpeed { get; private set; }
         [SerializeField] private float _friction;
+        [SerializeField] private float _speed;
         [SerializeField] private float _acceleration;
 
         [SerializeField] private float _angularFriction;
@@ -32,8 +30,7 @@ namespace GMTK
         {
             _velocity += direction * _acceleration * transform.right;
             _velocity += _friction * -_velocity;
-            _velocity = Vector3.ClampMagnitude(_velocity, MaxSpeed);
-            OnSpeedChanged?.Invoke(_velocity.magnitude);
+            _velocity = Vector3.ClampMagnitude(_velocity, _speed);
         }
 
         public void Rotate(float direction)

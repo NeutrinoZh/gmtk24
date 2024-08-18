@@ -22,7 +22,7 @@ namespace GMTK.GameStates
             nearestCell.GetComponent<Rigidbody2D>().isKinematic = false;
             _player.GetChild(0).GetChild(0).localScale = new(1f, 1f, 1);
 
-            ServiceLocator.Instance.Get<PlayerStats>().Speed = 1f;
+            ServiceLocator.Instance.Get<PlayerStats>().SpeedScale = 1f;
 
             _camera.Target = _player;
 

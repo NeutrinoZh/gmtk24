@@ -20,7 +20,7 @@ namespace GMTK
         {
             var inputValue = _input.Actions.PlayerBody.Move.ReadValue<Vector2>();
 
-            _body.Move(inputValue.y * _playerStats.Speed);
+            _body.Move(inputValue.y * _playerStats.SpeedScale);
             _body.Rotate(inputValue.x);
         }
     }
