@@ -8,6 +8,8 @@ namespace GMTK
 
     public class CellSpawner : MonoBehaviour
     {
+        public const int MAX_CHOICES_VALUE = 5000;
+
         [SerializeField] private Transform _cellPrefab;
         [SerializeField] private float _cellCount;
         [SerializeField, Tooltip("Squared distance threshold between cells")]
@@ -30,6 +32,7 @@ namespace GMTK
         private void SpawnCell()
         {
             Vector3 position;
+            int i = 0;
 
             while (true)
             {
@@ -53,10 +56,11 @@ namespace GMTK
                     }
                 }
 
-                if (!isCongruentWithOtherDestinations)
-                    continue;
+                i++;
 
-                break;
+                if (i >= MAX_CHOICES_VALUE || isCongruentWithOtherDestinations) break;
+                else if (!isCongruentWithOtherDestinations)
+                    continue;
             }
 
             var cell = Instantiate(_cellPrefab, transform);
