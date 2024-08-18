@@ -12,7 +12,6 @@ namespace GMTK
         [SerializeField] private Bounds _bounds;
         [SerializeField] private int _destinationsCount = 3;
         [SerializeField] private float _distanceThreshold = 25f;
-        private readonly List<BackgroundBacteria> _bacterias;
         private List<Vector2> _allDestinations;
 
         private void Start()
