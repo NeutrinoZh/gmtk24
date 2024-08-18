@@ -34,6 +34,7 @@ namespace GMTK.MicroViruses
         private void SpawnVirus()
         {
             var inCellVirus = Instantiate(_orangePrefab, transform);
+            inCellVirus.GetComponent<InCellVirus>().Init(_virusManager);
             _virusManager.AddObject(inCellVirus);
         }
 

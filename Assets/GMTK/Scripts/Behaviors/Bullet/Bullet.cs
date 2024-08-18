@@ -37,7 +37,7 @@ namespace GMTK
         {
             if (other.gameObject.TryGetComponent(out IDamageable damageable))
             {
-                damageable.Damage(_damage);
+                damageable.Damage(_damage, transform.right);
                 _bulletManager.DestroyBullet(transform);
             }
         }
