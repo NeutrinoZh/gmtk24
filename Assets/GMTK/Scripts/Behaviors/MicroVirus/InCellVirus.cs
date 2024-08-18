@@ -49,6 +49,11 @@ namespace GMTK.MicroViruses
             _virusBehavior.Update();
         }
 
+        private void FixedUpdate()
+        {
+            _virusBehavior.FixedUpdate();
+        }
+
         public void Damage(int damage, Vector3 attackDirection)
         {
             _health -= damage;
