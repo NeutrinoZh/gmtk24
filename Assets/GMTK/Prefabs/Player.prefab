@@ -5249,6 +5249,7 @@ GameObject:
   - component: {fileID: 8606209199671591412}
   - component: {fileID: 5209961479369042764}
   - component: {fileID: 378154601459727843}
+  - component: {fileID: 8636596991416723720}
   - component: {fileID: 3354424670928061302}
   - component: {fileID: 1879675957597179286}
   - component: {fileID: 7030177624050071867}
@@ -5302,6 +5303,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _reloadTime: 0.625
+--- !u!114 &8636596991416723720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4626583103710619316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c234e8fcc1da842438a216ce6e816c6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _particleSystem: {fileID: 3737395053082080037}
+  _minMaxEmissionRate: {x: 0, y: 15}
 --- !u!114 &3354424670928061302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5314,8 +5329,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c792a76bcaf6144b85d813ce27c981d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <MaxSpeed>k__BackingField: 3
   _friction: 0.02
-  _speed: 3
   _acceleration: 1
   _angularFriction: 0.8
   _angularSpeed: 80
