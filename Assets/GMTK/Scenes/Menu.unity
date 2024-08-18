@@ -779,7 +779,7 @@ MonoBehaviour:
   _fadeInPanel: {fileID: 260997219}
   _fadeInEndValue: 0
   _fadeOutEndValue: 2500
-  _fadeDuration: 1
+  _fadeDuration: 3
 --- !u!4 &1800793703
 Transform:
   m_ObjectHideFlags: 0
