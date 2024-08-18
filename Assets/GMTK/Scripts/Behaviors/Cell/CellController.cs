@@ -44,15 +44,24 @@ namespace GMTK
             _cellManager = ServiceLocator.Instance.Get<CellManager>();
             _virusSpawner = ServiceLocator.Instance.Get<VirusSpawner>();
 
+            _inCellVirusManager.GetComponent<InCellVirusManager>().OnObjectRemoved += OnDestroyVirus;
+
             SetVelocity(WorldState.MACRO_WORLD);
 
             _spriteRenderer.material.SetFloat("_Blend", 1f);
             StartCoroutine(PoisonCoroutine());
+
+            transform.GetChild(0).gameObject.SetActive(false);
         }
 
-        public void AddVirus()
+        public void OnAddVirus()
         {
             _virusCount += 1;
+        }
+
+        public void OnDestroyVirus()
+        {
+            _virusCount -= 1;
         }
 
         private IEnumerator PoisonCoroutine()

@@ -43,6 +43,12 @@ namespace GMTK
 
         private void FixedUpdate()
         {
+            if (_behavior is AttackCell attackBehavior && !attackBehavior.Target)
+            {
+                ChangeBehavior(new MoveToCell());
+                return;
+            }
+
             _behavior.FixedUpdate();
         }
 

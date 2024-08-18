@@ -8,6 +8,8 @@ namespace GMTK.VirusBehaviors
         private Transform _transform;
         private DriftMovableObject _body;
 
+        public Transform Target => _target;
+
         public AttackCell(Transform target)
         {
             _target = target;
