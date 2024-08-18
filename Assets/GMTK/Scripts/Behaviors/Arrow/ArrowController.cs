@@ -1,3 +1,5 @@
+using GMTK.GameStates;
+using GMTK.Services;
 using System.Collections;
 using UnityEngine;
 
@@ -7,17 +9,20 @@ namespace GMTK
     {
         [SerializeField] private Arrow _arrow;
 
+        private GamePlayState _gamePlayState;
         private const float k_findTargetInterval = 0.1f;
 
         private void Start()
         {
+            _gamePlayState = ServiceLocator.Instance.Get<GamePlayState>();
+
             StartCoroutine(StartFindTargets(k_findTargetInterval));
         }
 
         private void FindTarget()
         {
             var targetPosition = _arrow.FindTargetPosition();
-            if (targetPosition == null)
+            if (targetPosition == null || _gamePlayState.State == WorldState.MICRO_WORLD)
             {
                 _arrow.SetArrowState(false);
                 return;
