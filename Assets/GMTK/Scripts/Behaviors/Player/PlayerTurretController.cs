@@ -31,7 +31,7 @@ namespace GMTK
 
         private void Update()
         {
-            if (!AbleToShoot) 
+            if (!AbleToShoot)
             {
                 _currentReloadTime -= Time.deltaTime;
             }
@@ -49,9 +49,15 @@ namespace GMTK
 #endif
         }
 
+        private void OnDestroy()
+        {
+            _input.Actions.PlayerTurret.Fire.performed -= Fire;
+        }
+
         private void Fire(InputAction.CallbackContext ctx)
         {
-            if (!AbleToShoot) {
+            if (!AbleToShoot)
+            {
                 // Debug.LogWarning($"Unable to shoot while cooldown is active!");
                 return;
             }

@@ -20,6 +20,9 @@ namespace GMTK.MicroViruses
 
         public override void FixedUpdate()
         {
+            if (_target == null)
+                return;
+
             _rd.AddForce((_target.position - _transform.position).normalized * k_speed, ForceMode2D.Force);
         }
     }

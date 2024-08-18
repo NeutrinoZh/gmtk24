@@ -11,6 +11,11 @@ namespace GMTK.Services
 
         private Dictionary<Type, IService> _services = new();
 
+        public void Reset()
+        {
+            _services.Clear();
+        }
+
         public void Register<T>(T service) where T : IService
         {
             _services.Add(typeof(T), service);

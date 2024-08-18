@@ -45,6 +45,11 @@ namespace GMTK
             _angularVelocity = 0;
         }
 
+        public void Impulse(Vector3 impulse)
+        {
+            _velocity += impulse;
+        }
+            
         private void Update()
         {
             transform.position += Time.deltaTime * _velocity;

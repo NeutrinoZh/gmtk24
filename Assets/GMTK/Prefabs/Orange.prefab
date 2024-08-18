@@ -196,3 +196,4 @@ MonoBehaviour:
   _type: 0
   _damageMaterial: {fileID: 2100000, guid: ff1c34b5819982642a8c9b8f51409db0, type: 2}
   _maxHealth: 5
+  _damage: 1
