@@ -1,7 +1,7 @@
 using GMTK.Services;
+using GMTK.UI;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace GMTK
 {
@@ -34,7 +34,7 @@ namespace GMTK
             {
                 _isAlive = false;
                 StartCoroutine(AnimationOnDied());
-                // Destroy(gameObject, 3f);
+                Destroy(gameObject, 2f);
             }
 
             StartCoroutine(AnimationOnDamage(attackDirection));
@@ -43,10 +43,11 @@ namespace GMTK
         private IEnumerator AnimationOnDied()
         {
             yield return new WaitForSeconds(0.2f);
+
             transform.Find("Turret").gameObject.SetActive(false);
             _animator.Play("Base Layer.Died");
-            yield return new WaitForSeconds(1f);
-            SceneManager.LoadScene(0);
+
+            ServiceLocator.Instance.Get<HUD>().GameOverGroup(true);
         }
 
         private IEnumerator AnimationOnDamage(Vector3 attackDirection)

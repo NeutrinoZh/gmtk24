@@ -10,9 +10,11 @@ namespace GMTK
     {
         [SerializeField] private Transform _cellPrefab;
         [SerializeField] private float _cellCount;
-        [SerializeField, Tooltip("Squared distance threshold between cells")] 
+        [SerializeField, Tooltip("Squared distance threshold between cells")]
         private float _distanceThreshold = 10f;
-        
+        [SerializeField] private float _sizeOfStartZone;
+
+
         [SerializeField] private Bounds _spawnBounds;
 
         private CellManager _cellManager;
