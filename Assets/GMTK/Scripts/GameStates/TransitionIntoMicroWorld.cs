@@ -64,7 +64,7 @@ namespace GMTK.GameStates
            {
                _player.gameObject.layer = LayerMask.NameToLayer("InsideCellPlayer");
                _player.GetComponent<BoxCollider2D>().isTrigger = false;
-               _player.GetComponent<Rigidbody2D>().isKinematic = false;
+               //    _player.GetComponent<Rigidbody2D>().isKinematic = false;
 
                ServiceLocator.Instance.Get<HUD>().AdviceGetOutSet(true);
            });
