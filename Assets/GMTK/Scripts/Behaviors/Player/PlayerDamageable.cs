@@ -16,8 +16,11 @@ namespace GMTK
         private DriftMovableObject _body;
         private Animator _animator;
 
+        private Material _defaultMaterial;
+
         private void Start()
         {
+            _defaultMaterial = GetComponentInChildren<SpriteRenderer>().material;
             _animator = GetComponentInChildren<Animator>();
             _body = GetComponent<DriftMovableObject>();
             _health = _maxHealth;
@@ -47,21 +50,21 @@ namespace GMTK
             transform.Find("Turret").gameObject.SetActive(false);
             _animator.Play("Base Layer.Died");
 
+            yield return new WaitForSeconds(1f);
+
             ServiceLocator.Instance.Get<HUD>().GameOverGroup(true);
         }
 
         private IEnumerator AnimationOnDamage(Vector3 attackDirection)
         {
             var spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-            var defaultMaterial = spriteRenderer.material;
-
             spriteRenderer.material = _damageMaterial;
 
-            _body.Impulse(attackDirection * 0.3f);
+            _body.Impulse(-attackDirection * 0.6f);
 
             yield return new WaitForSeconds(0.1f);
 
-            spriteRenderer.material = defaultMaterial;
+            spriteRenderer.material = _defaultMaterial;
         }
     }
 }

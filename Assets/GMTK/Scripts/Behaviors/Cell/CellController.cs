@@ -125,12 +125,13 @@ namespace GMTK
             switch (state)
             {
                 case WorldState.MACRO_WORLD:
-                    _rb.drag = 0f;
+                    _rb.isKinematic = false;
                     _rb.velocity = new Vector3(Random.Range(-_maxVelocity.x, _maxVelocity.x), Random.Range(-_maxVelocity.y, _maxVelocity.y), 0);
                     break;
                 case WorldState.MICRO_WORLD:
-                    _rb.drag = 10f;
-                    _rb.velocity = Vector2.zero;
+                    _rb.velocity = Vector3.zero;
+                    _rb.angularVelocity = 0;
+                    _rb.isKinematic = true;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
