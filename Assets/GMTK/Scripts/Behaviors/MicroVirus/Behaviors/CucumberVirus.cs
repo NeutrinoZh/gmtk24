@@ -1,4 +1,5 @@
 using GMTK.Services;
+using System.Collections;
 using UnityEngine;
 
 namespace GMTK.MicroViruses
@@ -18,6 +19,8 @@ namespace GMTK.MicroViruses
         private float _attackTime;
 
         private AudioSource _attackAudio;
+        private Animator _animator;
+        private bool _animationPlaying;
         private Transform _bulletSpawnPoint;
 
         public CucumberVirus(Transform bulletPrefab)
@@ -30,6 +33,7 @@ namespace GMTK.MicroViruses
             _transform = transform;
             _target = ServiceLocator.Instance.Get<PlayerStats>().Player;
             _rd = transform.GetComponent<Rigidbody2D>();
+            _animator = transform.GetComponent<Animator>();
 
             _bulletSpawnPoint = transform.GetChild(0);
             _attackAudio = _bulletSpawnPoint.GetComponent<AudioSource>();
@@ -38,6 +42,7 @@ namespace GMTK.MicroViruses
         public override void OnEnable()
         {
             _attackTime = Time.time + k_attackCooldown;
+            _animationPlaying = false;
         }
 
         public override void FixedUpdate()
@@ -47,9 +52,16 @@ namespace GMTK.MicroViruses
 
             _rd.AddForce((_transform.position - _target.position).normalized * k_speed, ForceMode2D.Force);
 
+            if (Time.time > _attackTime + k_attackCooldown / 2 && !_animationPlaying)
+            {
+                _animationPlaying = true;
+                _animator.Play("Base Layer.Attack");
+            }
+
             if (Time.time > _attackTime + k_attackCooldown)
             {
                 _attackTime = Time.time + k_attackCooldown;
+                _animationPlaying = false;
 
                 var bullet = Object.Instantiate(_bulletPrefab, _bulletSpawnPoint);
                 bullet.transform.position = _transform.GetChild(0).position;
