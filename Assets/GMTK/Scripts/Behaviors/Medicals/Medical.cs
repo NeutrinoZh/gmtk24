@@ -9,12 +9,14 @@ namespace GMTK
     public class Medical : MonoBehaviour, IDamageable
     {
         private Animator _animator;
+        private BoxCollider2D _boxCollider;
         private bool _isWhole = true;
         private int _score = 0;
 
         private void Start()
         {
             _animator = GetComponent<Animator>();
+            _boxCollider = GetComponent<BoxCollider2D>();
         }
 
         public void Damage(int damage, Vector3 attackDirection)
@@ -24,6 +26,7 @@ namespace GMTK
 
             _isWhole = false;
             _animator.Play("Base Layer.Explosion");
+            _boxCollider.enabled = false;
 
             StartCoroutine(StartAnimationByDelay());
         }

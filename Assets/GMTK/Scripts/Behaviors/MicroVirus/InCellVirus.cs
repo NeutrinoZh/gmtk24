@@ -26,6 +26,7 @@ namespace GMTK.MicroViruses
         private InCellVirusManager _virusManager;
         private Animator _animator;
         private PlayerStats _playerStats;
+        private BoxCollider2D _boxCollider;
 
         private float _attackTime;
 
@@ -34,6 +35,7 @@ namespace GMTK.MicroViruses
         {
             _playerStats = ServiceLocator.Instance.Get<PlayerStats>();
             _animator = GetComponent<Animator>();
+            _boxCollider = GetComponent<BoxCollider2D>();
             _health = _maxHealth;
 
             switch (_type)
@@ -79,6 +81,7 @@ namespace GMTK.MicroViruses
             _health -= damage;
             if (_health <= 0)
             {
+                _boxCollider.enabled = false;
                 StartCoroutine(AnimationOnDied());
 
                 _playerStats.AddExperience();
