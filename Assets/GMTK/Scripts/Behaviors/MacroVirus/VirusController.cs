@@ -98,7 +98,9 @@ namespace GMTK
         private IEnumerator StartPenetrationAfterDelay(Transform cell)
         {
             yield return new WaitForSeconds(_delayBeforePenetration);
-            ChangeBehavior(new PenetrationIntoCell(cell));
+
+            if (cell.GetComponent<CellController>().IsAlive)
+                ChangeBehavior(new PenetrationIntoCell(cell));
         }
 
         private void ChangeBehavior(IBehavior behavior)

@@ -91,6 +91,15 @@ namespace GMTK
 
         private void Die()
         {
+            var player = ServiceLocator.Instance.Get<PlayerStats>().Player;
+
+            if (player != null)
+            {
+                var nearestCell = _cellManager.FindNearToPoint(player.position);
+                if (nearestCell == transform)
+                    ServiceLocator.Instance.Get<GamePlayState>().State = WorldState.MACRO_WORLD;
+            }
+
             _cellManager.RemoveObject(transform);
             Destroy(gameObject, 2f);
 

@@ -43,8 +43,7 @@ namespace GMTK.GameStates
             new TransitionIntoMicroWorld()
                 .Start(this);
 
-            foreach (var virus in _virusManager.Pool)
-                virus.gameObject.SetActive(false);
+            _virusManager.gameObject.SetActive(false);
         }
 
         private void TransitionIntoMacroWorld()
@@ -52,8 +51,7 @@ namespace GMTK.GameStates
             new TransitionIntoMacroWorld()
                 .Start(this);
 
-            foreach (var virus in _virusManager.Pool)
-                virus.gameObject.SetActive(true);
+            _virusManager.gameObject.SetActive(true);
         }
 
         void IState.Enter()
