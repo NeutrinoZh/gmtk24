@@ -5403,8 +5403,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d05eb44657fd0f4b9256f2ca47ad050, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseReloadTime: 1
-  _scaleByLevelUpgrade: 0.5
+  _baseReloadTime: 1.75
+  _scaleByLevelUpgrade: 0.25
 --- !u!114 &8636596991416723720
 MonoBehaviour:
   m_ObjectHideFlags: 0

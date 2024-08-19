@@ -49,7 +49,8 @@ namespace GMTK
                 _bulletManager.SpawnBullet(_bulletSpawnPoint.position, _turret.right);
 
                 _lastFireTime = Time.time;
-                _reloadTime = _baseReloadTime / (_playerStats.GetLevelUpgrade(UI.UpgradeType.PLAYER_ATTACK_SPEED) * _scaleByLevelUpgrade);
+                _reloadTime = _baseReloadTime - (_playerStats.GetLevelUpgrade(UI.UpgradeType.PLAYER_ATTACK_SPEED) * _scaleByLevelUpgrade);
+                _reloadTime = _reloadTime <= 0 ? 0.25f : _reloadTime;
 
                 _filledReloadImage.fillAmount = 0;
                 DOTween.To(

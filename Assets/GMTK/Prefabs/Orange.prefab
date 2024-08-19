@@ -193,7 +193,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 438688857b34b0e46bc999a1fe754d0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cucumberBulletPrefab: {fileID: 0}
   _type: 0
   _damageMaterial: {fileID: 2100000, guid: ff1c34b5819982642a8c9b8f51409db0, type: 2}
-  _maxHealth: 5
+  _maxHealth: 4
   _damage: 1

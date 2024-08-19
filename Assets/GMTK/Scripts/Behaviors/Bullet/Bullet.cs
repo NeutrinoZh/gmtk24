@@ -39,7 +39,10 @@ namespace GMTK
         {
             if (other.gameObject.TryGetComponent(out IDamageable damageable))
             {
-                damageable.Damage(_damage * _playerStats.GetLevelUpgrade(UI.UpgradeType.PLAYER_DAMAGE), transform.right);
+                var damage = _damage * (_playerStats.GetLevelUpgrade(UI.UpgradeType.PLAYER_DAMAGE) / 2);
+                damage = damage > 1 ? damage : 1;
+
+                damageable.Damage(damage, transform.right);
                 _bulletManager.DestroyBullet(transform);
             }
         }
