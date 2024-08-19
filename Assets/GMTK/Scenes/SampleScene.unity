@@ -2086,6 +2086,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 797727570}
+  - component: {fileID: 797727571}
   m_Layer: 5
   m_Name: Bars
   m_TagString: Untagged
@@ -2114,6 +2115,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &797727571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 797727569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2fc2e544eabe6d418c905160cdf02c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &821766882
 GameObject:
   m_ObjectHideFlags: 0
@@ -3630,12 +3643,14 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1c045690892f6ea4c84b401e9199e54f, type: 3}
   - {fileID: 21300000, guid: 10acce1bf3cbaac4a8c6dea4cd425348, type: 3}
   - {fileID: 21300000, guid: b6e0fcf8dc3407a42932d5e1009b6c08, type: 3}
+  - {fileID: 21300000, guid: 203f27f8e0ae50f45ad4c14a28e869a9, type: 3}
   _upgradesTexts:
   - +1 Move Speed
   - +1 Mobility
   - +1 Attack Speed
-  - +1 Armor
+  - +1 Armor Point
   - +1 Damage
+  - +1 Health Point
 --- !u!1 &1280967600
 GameObject:
   m_ObjectHideFlags: 0
@@ -3956,7 +3971,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillAmount: 0.26
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0

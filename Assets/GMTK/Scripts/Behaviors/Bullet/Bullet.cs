@@ -13,6 +13,7 @@ namespace GMTK
 
         private BulletManager _bulletManager;
         private GamePlayState _gamePlayState;
+        private PlayerStats _playerStats;
 
         private void Update()
         {
@@ -26,6 +27,7 @@ namespace GMTK
         {
             _bulletManager ??= ServiceLocator.Instance.Get<BulletManager>();
             _gamePlayState ??= ServiceLocator.Instance.Get<GamePlayState>();
+            _playerStats ??= ServiceLocator.Instance.Get<PlayerStats>();
 
             StartCoroutine(BulletDestroyByDelay());
 
@@ -37,7 +39,7 @@ namespace GMTK
         {
             if (other.gameObject.TryGetComponent(out IDamageable damageable))
             {
-                damageable.Damage(_damage, transform.right);
+                damageable.Damage(_damage * _playerStats.GetLevelUpgrade(UI.UpgradeType.PLAYER_DAMAGE), transform.right);
                 _bulletManager.DestroyBullet(transform);
             }
         }

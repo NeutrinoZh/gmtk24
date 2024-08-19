@@ -13,7 +13,8 @@ namespace GMTK.UI
         PLAYER_MOBILITY,
         PLAYER_ATTACK_SPEED,
         PLAYER_ARMOR,
-        PLAYER_DAMAGE
+        PLAYER_DAMAGE,
+        PLAYER_HP
     };
 
     public class UpgradesHUD : MonoBehaviour

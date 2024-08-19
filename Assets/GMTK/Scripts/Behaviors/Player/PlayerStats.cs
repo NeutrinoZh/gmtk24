@@ -1,4 +1,5 @@
 using GMTK.UI;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ namespace GMTK.Services
 {
     public class PlayerStats : IService
     {
-        private List<int> _debugLevels = new(5) { 0, 0, 0, 0, 0 };
+        private List<int> _debugLevels = new(6) { 0, 0, 0, 0, 0, 0 };
 
         private Dictionary<UpgradeType, int> _levelsOfUpgrades = new();
 
@@ -16,7 +17,7 @@ namespace GMTK.Services
         {
             get
             {
-                return _speedScale * GetLevelUpgrade(UpgradeType.PLAYER_MOVE_SPEED);
+                return _speedScale;
             }
             set
             {
@@ -27,6 +28,8 @@ namespace GMTK.Services
         public int Time { get; set; } = 0;
         public Transform Player { get; set; }
 
+        public event Action<UpgradeType> OnUpgrade;
+
         public void Upgrade(UpgradeType _upgrade)
         {
             if (!_levelsOfUpgrades.ContainsKey(_upgrade))
@@ -34,6 +37,8 @@ namespace GMTK.Services
             _levelsOfUpgrades[_upgrade] += 1;
 
             _debugLevels[(int)_upgrade] = _levelsOfUpgrades[_upgrade];
+
+            OnUpgrade?.Invoke(_upgrade);
         }
 
         public int GetLevelUpgrade(UpgradeType _upgrade)
