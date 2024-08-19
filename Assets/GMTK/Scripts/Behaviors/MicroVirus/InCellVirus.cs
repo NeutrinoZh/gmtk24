@@ -26,6 +26,7 @@ namespace GMTK.MicroViruses
         private InCellVirusManager _virusManager;
         private Animator _animator;
         private PlayerStats _playerStats;
+        private AudioSource[] _audioSources;
         private BoxCollider2D _boxCollider;
 
         private float _attackTime;
@@ -33,6 +34,7 @@ namespace GMTK.MicroViruses
 
         private void Awake()
         {
+            _audioSources = GetComponents<AudioSource>();
             _playerStats = ServiceLocator.Instance.Get<PlayerStats>();
             _animator = GetComponent<Animator>();
             _boxCollider = GetComponent<BoxCollider2D>();
@@ -108,6 +110,7 @@ namespace GMTK.MicroViruses
         {
             yield return new WaitForSeconds(0.2f);
             _animator.Play("Base Layer.Died");
+            _audioSources[1].Play();
         }
 
         private IEnumerator AnimationOnDamage(Vector3 attackDirection)
@@ -119,6 +122,8 @@ namespace GMTK.MicroViruses
 
             if (transform.TryGetComponent(out Rigidbody2D rd))
                 rd.AddForce(attackDirection * 0.8f, ForceMode2D.Impulse);
+
+            _audioSources[0].Play();
 
             yield return new WaitForSeconds(0.1f);
 

@@ -17,6 +17,9 @@ namespace GMTK.MicroViruses
 
         private float _attackTime;
 
+        private AudioSource _attackAudio;
+        private Transform _bulletSpawnPoint;
+
         public CucumberVirus(Transform bulletPrefab)
         {
             _bulletPrefab = bulletPrefab;
@@ -27,6 +30,9 @@ namespace GMTK.MicroViruses
             _transform = transform;
             _target = ServiceLocator.Instance.Get<PlayerStats>().Player;
             _rd = transform.GetComponent<Rigidbody2D>();
+
+            _bulletSpawnPoint = transform.GetChild(0);
+            _attackAudio = _bulletSpawnPoint.GetComponent<AudioSource>();
         }
 
         public override void OnEnable()
@@ -45,9 +51,11 @@ namespace GMTK.MicroViruses
             {
                 _attackTime = Time.time + k_attackCooldown;
 
-                var bullet = Object.Instantiate(_bulletPrefab);
+                var bullet = Object.Instantiate(_bulletPrefab, _bulletSpawnPoint);
                 bullet.transform.position = _transform.GetChild(0).position;
                 bullet.transform.right = (_target.position - _transform.position).normalized;
+
+                _attackAudio.Play();
             }
         }
     }

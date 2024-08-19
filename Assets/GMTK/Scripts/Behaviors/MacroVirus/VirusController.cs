@@ -24,6 +24,8 @@ namespace GMTK
 
         private int _health;
 
+        private AudioSource[] _audioSources;
+
         private void Start()
         {
             _health = _maxHealth;
@@ -36,6 +38,8 @@ namespace GMTK
             _target = _cellManager.FindNearToPoint(transform.position);
 
             _virusManager = ServiceLocator.Instance.Get<VirusManager>();
+
+            _audioSources = GetComponents<AudioSource>();
 
             ChangeBehavior(new MoveToCell());
         }
@@ -86,6 +90,7 @@ namespace GMTK
         {
             yield return new WaitForSeconds(0.2f);
             _animator.Play("Base Layer.Died");
+            _audioSources[1].Play();
         }
 
         private IEnumerator AnimationOnDamage(Vector3 attackDirection)
@@ -96,6 +101,8 @@ namespace GMTK
             spriteRenderer.material = _damageMaterial;
 
             _body.Impulse(attackDirection);
+
+            _audioSources[0].Play();
 
             yield return new WaitForSeconds(0.1f);
 
