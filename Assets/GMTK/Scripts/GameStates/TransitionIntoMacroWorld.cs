@@ -27,6 +27,7 @@ namespace GMTK.GameStates
 
             _player.GetComponent<DriftMovableObject>().Stop();
             nearestCell.GetComponent<Rigidbody2D>().isKinematic = false;
+            nearestCell.GetComponent<Animator>().speed = 1;
             _player.GetChild(0).GetChild(0).localScale = new(1f, 1f, 1);
 
             ServiceLocator.Instance.Get<PlayerStats>().SpeedScale = 1f;

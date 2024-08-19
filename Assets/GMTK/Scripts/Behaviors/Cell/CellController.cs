@@ -48,6 +48,8 @@ namespace GMTK
 
             SetVelocity(WorldState.MACRO_WORLD);
 
+            _animator.enabled = false;
+
             _spriteRenderer.material.SetFloat("_Blend", 1f);
             StartCoroutine(PoisonCoroutine());
 
@@ -92,6 +94,7 @@ namespace GMTK
             _cellManager.RemoveObject(transform);
             Destroy(gameObject, 2f);
 
+            _animator.enabled = true;
             _animator.Play("Base Layer.Dead");
 
             if (_cellManager.Pool.Count == 0)
