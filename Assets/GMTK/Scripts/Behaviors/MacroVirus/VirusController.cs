@@ -18,6 +18,7 @@ namespace GMTK
         private Transform _target;
         private Animator _animator;
         private PlayerStats _playerStats;
+        private BoxCollider2D _boxCollider;
 
         private IBehavior _behavior;
 
@@ -31,6 +32,7 @@ namespace GMTK
 
             _animator = GetComponentInChildren<Animator>();
             _body = GetComponent<DriftMovableObject>();
+            _boxCollider = GetComponent<BoxCollider2D>();
             _cellManager = ServiceLocator.Instance.Get<CellManager>();
             _playerStats = ServiceLocator.Instance.Get<PlayerStats>();
             _target = _cellManager.FindNearToPoint(transform.position);
@@ -63,6 +65,7 @@ namespace GMTK
             _health -= damage;
             if (_health <= 0)
             {
+                _boxCollider.enabled = false;
                 StartCoroutine(AnimationOnDied());
 
                 _playerStats.AddExperience();

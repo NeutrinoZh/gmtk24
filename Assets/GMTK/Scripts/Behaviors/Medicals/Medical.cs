@@ -10,6 +10,7 @@ namespace GMTK
     {
         private AudioSource[] _audioSources;
         private Animator _animator;
+        private BoxCollider2D _boxCollider;
         private bool _isWhole = true;
         private int _score = 0;
 
@@ -17,6 +18,7 @@ namespace GMTK
         {
             _audioSources = GetComponents<AudioSource>();
             _animator = GetComponent<Animator>();
+            _boxCollider = GetComponent<BoxCollider2D>();
         }
 
         public void Damage(int damage, Vector3 attackDirection)
@@ -28,6 +30,8 @@ namespace GMTK
 
             _animator.Play("Base Layer.Explosion");
             _audioSources[0].Play();
+
+            _boxCollider.enabled = false;
 
             StartCoroutine(StartAnimationByDelay());
         }
