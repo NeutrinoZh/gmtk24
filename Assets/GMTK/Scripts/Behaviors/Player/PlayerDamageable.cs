@@ -16,6 +16,7 @@ namespace GMTK
         private DriftMovableObject _body;
         private Animator _animator;
         private PlayerStats _playerStats;
+        private AudioList _audioList;
 
         private Material _defaultMaterial;
 
@@ -26,6 +27,8 @@ namespace GMTK
 
         private void Start()
         {
+            _audioList = GetComponent<AudioList>();
+
             _playerStats = ServiceLocator.Instance.Get<PlayerStats>();
             _playerStats.OnUpgrade += OnUpgrade;
 
@@ -68,11 +71,14 @@ namespace GMTK
             }
 
             StartCoroutine(AnimationOnDamage(attackDirection));
+            _audioList.Play(2);
         }
 
         private IEnumerator AnimationOnDied()
         {
             yield return new WaitForSeconds(0.2f);
+
+            _audioList.Play(3);
 
             transform.Find("Turret").gameObject.SetActive(false);
             _animator.Play("Base Layer.Died");
@@ -87,7 +93,7 @@ namespace GMTK
             var spriteRenderer = GetComponentInChildren<SpriteRenderer>();
             spriteRenderer.material = _damageMaterial;
 
-            _body.Impulse(attackDirection);
+            _body.Impulse(attackDirection * 0.3f);
 
             yield return new WaitForSeconds(0.1f);
 

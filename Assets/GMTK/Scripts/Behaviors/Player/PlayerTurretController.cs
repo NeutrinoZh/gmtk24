@@ -21,6 +21,7 @@ namespace GMTK
         private Transform _turret;
         private Transform _bulletSpawnPoint;
         private PlayerStats _playerStats;
+        private AudioSource _audioSource;
 
         private Image _filledReloadImage;
 
@@ -32,6 +33,7 @@ namespace GMTK
 
             _turret = transform.Find(PlayerFactory.k_turretName);
             _bulletSpawnPoint = _turret.transform.GetChild(0);
+            _audioSource = _turret.GetComponent<AudioSource>();
 
             _filledReloadImage = transform.Find("Canvas").GetChild(1).GetComponent<Image>();
 
@@ -43,6 +45,7 @@ namespace GMTK
         {
             if (Time.time > _lastFireTime + _reloadTime && _isFire)
             {
+                _audioSource.Play();
                 _bulletManager.SpawnBullet(_bulletSpawnPoint.position, _turret.right);
 
                 _lastFireTime = Time.time;
