@@ -70,7 +70,7 @@ namespace GMTK.UI
                 int minutes = _playerStats.Time / 60;
                 int seconds = _playerStats.Time % 60;
 
-                _timeTextMesh.text = $"{minutes}:{seconds}";
+                _timeTextMesh.text = $"{minutes:D2}:{seconds:D2}";
 
                 yield return new WaitForSeconds(1);
             }

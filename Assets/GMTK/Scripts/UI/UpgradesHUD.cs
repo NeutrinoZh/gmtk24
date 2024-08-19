@@ -47,8 +47,9 @@ namespace GMTK.UI
             var types = new List<UpgradeType>((UpgradeType[])Enum.GetValues(typeof(UpgradeType)));
             for (int i = 0; i < 3; ++i)
             {
-                _upgradeTypes[i] = types[UnityEngine.Random.Range(0, types.Count)];
-                types.Remove(types[i]);
+                int at = UnityEngine.Random.Range(0, types.Count);
+                _upgradeTypes[i] = types[at];
+                types.RemoveAt(at);
             }
 
             for (int i = 0; i < 3; ++i)
