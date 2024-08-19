@@ -17,6 +17,7 @@ namespace GMTK
         private DriftMovableObject _body;
         private Transform _target;
         private Animator _animator;
+        private PlayerStats _playerStats;
 
         private IBehavior _behavior;
 
@@ -29,6 +30,7 @@ namespace GMTK
             _animator = GetComponentInChildren<Animator>();
             _body = GetComponent<DriftMovableObject>();
             _cellManager = ServiceLocator.Instance.Get<CellManager>();
+            _playerStats = ServiceLocator.Instance.Get<PlayerStats>();
             _target = _cellManager.FindNearToPoint(transform.position);
 
             _virusManager = ServiceLocator.Instance.Get<VirusManager>();
@@ -58,6 +60,8 @@ namespace GMTK
             if (_health <= 0)
             {
                 StartCoroutine(AnimationOnDied());
+
+                _playerStats.AddExperience();
 
                 _virusManager.RemoveObject(transform);
                 Destroy(gameObject, 1);
@@ -99,7 +103,7 @@ namespace GMTK
         {
             yield return new WaitForSeconds(_delayBeforePenetration);
 
-            if (cell.GetComponent<CellController>().IsAlive)
+            if (cell && cell.GetComponent<CellController>().IsAlive)
                 ChangeBehavior(new PenetrationIntoCell(cell));
         }
 

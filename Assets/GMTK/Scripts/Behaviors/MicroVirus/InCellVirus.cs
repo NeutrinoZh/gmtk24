@@ -1,3 +1,4 @@
+using GMTK.Services;
 using System.Collections;
 using UnityEngine;
 
@@ -24,12 +25,14 @@ namespace GMTK.MicroViruses
         private VirusBehavior _virusBehavior;
         private InCellVirusManager _virusManager;
         private Animator _animator;
+        private PlayerStats _playerStats;
 
         private float _attackTime;
 
 
         private void Awake()
         {
+            _playerStats = ServiceLocator.Instance.Get<PlayerStats>();
             _animator = GetComponent<Animator>();
             _health = _maxHealth;
 
@@ -78,6 +81,7 @@ namespace GMTK.MicroViruses
             {
                 StartCoroutine(AnimationOnDied());
 
+                _playerStats.AddExperience();
                 _virusManager.RemoveObject(transform);
                 Destroy(gameObject, 1f);
             }

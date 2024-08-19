@@ -25,10 +25,12 @@ namespace GMTK.GameStates
             _player.GetComponent<DriftMovableObject>().Stop();
             _player.GetComponent<BoxCollider2D>().isTrigger = true;
             _player.GetChild(0).GetChild(0).localScale = new(0.3f, 0.3f, 1);
+            _player.GetComponent<AudioList>().Play(1);
 
             nearestCell.GetComponent<Rigidbody2D>().isKinematic = true;
             nearestCell.GetComponent<Animator>().speed = 0;
 
+            ServiceLocator.Instance.Get<AudioMixerController>().SetIncell();
             ServiceLocator.Instance.Get<PlayerStats>().SpeedScale = 0.01f;
 
             _camera.Target = nearestCell;

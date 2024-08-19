@@ -20,9 +20,16 @@ namespace GMTK
             return _velocity;
         }
 
-        public float GetSpeed()
+        public float GetSpeed() => _speed;
+        public void SetSpeed(float speed)
         {
-            return _speed;
+            _speed = speed;
+        }
+
+        public float GetAngularSpeed() => _angularSpeed;
+        public void SetAngularSpeed(float angularSpeed)
+        {
+            _angularSpeed = angularSpeed;
         }
 
         public void Move(float direction)
@@ -49,7 +56,7 @@ namespace GMTK
         {
             _velocity += impulse;
         }
-            
+
         private void Update()
         {
             transform.position += Time.deltaTime * _velocity;
