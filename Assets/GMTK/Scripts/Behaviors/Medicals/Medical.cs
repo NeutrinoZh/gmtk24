@@ -1,5 +1,6 @@
 using DG.Tweening;
 using GMTK.Services;
+using GMTK.UI;
 using System.Collections;
 using UnityEngine;
 
@@ -14,14 +15,6 @@ namespace GMTK
         private void Start()
         {
             _animator = GetComponent<Animator>();
-        }
-
-        private void Update()
-        {
-            if (_score == transform.childCount)
-            {
-                Debug.Log("Upgrade");
-            }
         }
 
         public void Damage(int damage, Vector3 attackDirection)
@@ -40,7 +33,17 @@ namespace GMTK
             yield return new WaitForSeconds(1f);
             _animator.enabled = false;
             foreach (Transform item in transform)
-                item.GetComponent<Vitamin>().PlayAnimation(() => _score += 1);
+                item.GetComponent<Vitamin>().PlayAnimation(VitaminCallback);
+        }
+
+        private void VitaminCallback()
+        {
+            _score += 1;
+            if (_score == transform.childCount)
+            {
+                ServiceLocator.Instance.Get<HUD>().UpgradeDialog(true);
+                Destroy(gameObject);
+            }
         }
     }
 }
