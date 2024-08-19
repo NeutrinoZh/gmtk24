@@ -17,7 +17,6 @@ namespace GMTK.UI
         private PlayerStats _playerStats;
 
         private TextMeshProUGUI _timeTextMesh;
-        private int _time = -1;
 
         public void AdviceGetOutSet(bool isActive)
         {
@@ -51,10 +50,10 @@ namespace GMTK.UI
         {
             while (true)
             {
-                _time += 1;
+                _playerStats.Time += 1;
 
-                int minutes = _time / 60;
-                int seconds = _time % 60;
+                int minutes = _playerStats.Time / 60;
+                int seconds = _playerStats.Time % 60;
 
                 _timeTextMesh.text = $"{minutes}:{seconds}";
 

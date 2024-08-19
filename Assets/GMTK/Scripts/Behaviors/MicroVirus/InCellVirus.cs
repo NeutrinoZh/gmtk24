@@ -5,7 +5,8 @@ namespace GMTK.MicroViruses
 {
     public enum InCellVirusBehaviorType
     {
-        ORANGE
+        ORANGE,
+        CUCUMBER
     };
 
     public class InCellVirus : MonoBehaviour, IDamageable
@@ -13,6 +14,7 @@ namespace GMTK.MicroViruses
 
         private const float k_attackCooldown = 2f;
 
+        [SerializeField] private Transform _cucumberBulletPrefab;
         [SerializeField] private InCellVirusBehaviorType _type;
         [SerializeField] private Material _damageMaterial;
         [SerializeField] private int _maxHealth;
@@ -36,6 +38,9 @@ namespace GMTK.MicroViruses
                 case InCellVirusBehaviorType.ORANGE:
                     _virusBehavior = new OrangeVirus();
                     break;
+                case InCellVirusBehaviorType.CUCUMBER:
+                    _virusBehavior = new CucumberVirus(_cucumberBulletPrefab);
+                    break;
                 default:
                     break;
             }
@@ -44,6 +49,11 @@ namespace GMTK.MicroViruses
         public void Init(InCellVirusManager virusManager)
         {
             _virusManager = virusManager;
+        }
+
+        private void OnEnable()
+        {
+            _virusBehavior.OnEnable();
         }
 
         private void Start()
@@ -83,7 +93,7 @@ namespace GMTK.MicroViruses
             if (other.gameObject.TryGetComponent(out PlayerDamageable damageable))
             {
                 _attackTime = Time.time;
-                damageable.Damage(_damage, transform.right);
+                damageable.Damage(_damage, (damageable.transform.position - transform.position).normalized);
             }
         }
 
@@ -101,7 +111,7 @@ namespace GMTK.MicroViruses
             spriteRenderer.material = _damageMaterial;
 
             if (transform.TryGetComponent(out Rigidbody2D rd))
-                rd.AddForce(attackDirection * 0.3f, ForceMode2D.Impulse);
+                rd.AddForce(attackDirection * 0.8f, ForceMode2D.Impulse);
 
             yield return new WaitForSeconds(0.1f);
 

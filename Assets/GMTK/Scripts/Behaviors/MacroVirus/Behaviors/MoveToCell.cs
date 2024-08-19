@@ -20,6 +20,12 @@ namespace GMTK.VirusBehaviors
 
         void IBehavior.FixedUpdate()
         {
+            if (_target == null)
+            {
+                _target = _cellManager.FindNearToPoint(_transform.position);
+                return;
+            }
+
             var direction = _target.position - _transform.position;
             float product = _transform.right.x * direction.y - _transform.right.y * direction.x;
 

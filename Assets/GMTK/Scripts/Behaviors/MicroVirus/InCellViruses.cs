@@ -1,3 +1,5 @@
+using GMTK.Services;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace GMTK.MicroViruses
@@ -7,15 +9,18 @@ namespace GMTK.MicroViruses
     public class InCellViruses : MonoBehaviour
     {
         [SerializeField] private Transform _orangePrefab;
+        [SerializeField] private Transform _cucumberPrefab;
         [SerializeField] private Bounds _bounds;
 
         private int _countSpawnedViruses;
 
         private InCellVirusManager _virusManager;
+        private PlayerStats _playerStats;
 
         private void Awake()
         {
             _virusManager = gameObject.AddComponent<InCellVirusManager>();
+            _playerStats = ServiceLocator.Instance.Get<PlayerStats>();
         }
 
         public void SetVirusesCount(int _count)
@@ -31,7 +36,14 @@ namespace GMTK.MicroViruses
 
         private void SpawnVirus()
         {
-            var inCellVirus = Instantiate(_orangePrefab, transform);
+            var prefabs = new List<Transform>(){
+                _orangePrefab
+            };
+
+            if (_playerStats.Time >= 50)
+                prefabs.Add(_cucumberPrefab);
+
+            var inCellVirus = Instantiate(prefabs[Random.Range(0, prefabs.Count)], transform);
             inCellVirus.GetComponent<InCellVirus>().Init(_virusManager);
             _virusManager.AddObject(inCellVirus);
         }

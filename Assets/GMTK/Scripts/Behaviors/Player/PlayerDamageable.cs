@@ -60,7 +60,7 @@ namespace GMTK
             var spriteRenderer = GetComponentInChildren<SpriteRenderer>();
             spriteRenderer.material = _damageMaterial;
 
-            _body.Impulse(-attackDirection * 0.6f);
+            _body.Impulse(attackDirection);
 
             yield return new WaitForSeconds(0.1f);
 
