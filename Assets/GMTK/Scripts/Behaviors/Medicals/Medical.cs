@@ -41,7 +41,7 @@ namespace GMTK
             _score += 1;
             if (_score == transform.childCount)
             {
-                ServiceLocator.Instance.Get<HUD>().UpgradeDialog(true);
+                ServiceLocator.Instance.Get<PlayerStats>().AddExperience();
                 Destroy(gameObject);
             }
         }
