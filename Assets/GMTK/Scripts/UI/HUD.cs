@@ -13,6 +13,7 @@ namespace GMTK.UI
         private Transform _adviceGetOut;
         private Transform _gameOverGroup;
         private Transform _upgradeGroup;
+        private Transform _barsGroup;
 
         private InputController _inputController;
         private PlayerStats _playerStats;
@@ -27,12 +28,14 @@ namespace GMTK.UI
         public void GameOverGroup(bool isActive)
         {
             _gameOverGroup.gameObject.SetActive(isActive);
+            _barsGroup.gameObject.SetActive(false);
         }
 
         public void UpgradeDialog(bool isActive)
         {
             _upgradeGroup.gameObject.SetActive(isActive);
             _timeTextMesh.gameObject.SetActive(!isActive);
+            _barsGroup.gameObject.SetActive(!isActive);
         }
 
         private void Awake()
@@ -51,6 +54,8 @@ namespace GMTK.UI
 
             _upgradeGroup = transform.Find("UpgradeGroup");
             _upgradeGroup.gameObject.SetActive(false);
+
+            _barsGroup = transform.Find("Bars");
 
             _timeTextMesh = transform.Find("Time").GetComponent<TextMeshProUGUI>();
             StartCoroutine(StartTime());

@@ -99,7 +99,7 @@ namespace GMTK
         {
             yield return new WaitForSeconds(_delayBeforePenetration);
 
-            if (cell.GetComponent<CellController>().IsAlive)
+            if (cell && cell.GetComponent<CellController>().IsAlive)
                 ChangeBehavior(new PenetrationIntoCell(cell));
         }
 

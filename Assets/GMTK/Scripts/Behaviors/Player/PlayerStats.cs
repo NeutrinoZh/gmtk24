@@ -6,6 +6,8 @@ namespace GMTK.Services
 {
     public class PlayerStats : IService
     {
+        private List<int> _debugLevels = new(5) { 0, 0, 0, 0, 0 };
+
         private Dictionary<UpgradeType, int> _levelsOfUpgrades = new();
 
         private float _speedScale = 1f;
@@ -30,6 +32,8 @@ namespace GMTK.Services
             if (!_levelsOfUpgrades.ContainsKey(_upgrade))
                 _levelsOfUpgrades[_upgrade] = 1;
             _levelsOfUpgrades[_upgrade] += 1;
+
+            _debugLevels[(int)_upgrade] = _levelsOfUpgrades[_upgrade];
         }
 
         public int GetLevelUpgrade(UpgradeType _upgrade)

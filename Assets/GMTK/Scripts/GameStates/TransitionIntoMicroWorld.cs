@@ -29,6 +29,7 @@ namespace GMTK.GameStates
             nearestCell.GetComponent<Rigidbody2D>().isKinematic = true;
             nearestCell.GetComponent<Animator>().speed = 0;
 
+            ServiceLocator.Instance.Get<AudioMixerController>().SetIncell();
             ServiceLocator.Instance.Get<PlayerStats>().SpeedScale = 0.01f;
 
             _camera.Target = nearestCell;

@@ -1,6 +1,7 @@
 using GMTK.Services;
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,17 +18,27 @@ namespace GMTK.UI
 
     public class UpgradesHUD : MonoBehaviour
     {
-        [SerializeField] private List<Image> _upgradesIcons;
+        [SerializeField] private List<Sprite> _upgradesIcons;
+        [SerializeField] private List<string> _upgradesTexts;
+
+        private List<Image> _images = new();
+        private List<TextMeshProUGUI> _texts = new();
+
         private List<UpgradeType> _upgradeTypes = new() {
             UpgradeType.PLAYER_MOVE_SPEED, UpgradeType.PLAYER_DAMAGE, UpgradeType.PLAYER_ARMOR
         };
 
-        private void Start()
+        private void Awake()
         {
             for (int i = 0; i < 3; ++i)
             {
                 int index = i;
-                transform.GetChild(i).GetComponent<Button>().onClick.AddListener(() => OnClick(index));
+
+                var element = transform.GetChild(i);
+
+                element.GetComponent<Button>().onClick.AddListener(() => OnClick(index));
+                _images.Add(element.GetComponent<Image>());
+                _texts.Add(element.GetComponentInChildren<TextMeshProUGUI>());
             }
         }
 
@@ -38,6 +49,12 @@ namespace GMTK.UI
             {
                 _upgradeTypes[i] = types[UnityEngine.Random.Range(0, types.Count)];
                 types.Remove(types[i]);
+            }
+
+            for (int i = 0; i < 3; ++i)
+            {
+                _images[i].sprite = _upgradesIcons[(int)_upgradeTypes[i]];
+                _texts[i].text = _upgradesTexts[(int)_upgradeTypes[i]];
             }
         }
 

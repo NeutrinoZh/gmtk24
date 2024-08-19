@@ -30,6 +30,7 @@ namespace GMTK.GameStates
             nearestCell.GetComponent<Animator>().speed = 1;
             _player.GetChild(0).GetChild(0).localScale = new(1f, 1f, 1);
 
+            ServiceLocator.Instance.Get<AudioMixerController>().SetMaster();
             ServiceLocator.Instance.Get<PlayerStats>().SpeedScale = 1f;
 
             _camera.Target = _player;

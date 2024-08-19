@@ -1,6 +1,8 @@
+using DG.Tweening;
 using GMTK.Services;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace GMTK
 {
@@ -20,6 +22,8 @@ namespace GMTK
         private Transform _bulletSpawnPoint;
         private PlayerStats _playerStats;
 
+        private Image _filledReloadImage;
+
         private void Start()
         {
             _input = ServiceLocator.Instance.Get<InputController>();
@@ -28,6 +32,8 @@ namespace GMTK
 
             _turret = transform.Find(PlayerFactory.k_turretName);
             _bulletSpawnPoint = _turret.transform.GetChild(0);
+
+            _filledReloadImage = transform.Find("Canvas").GetChild(1).GetComponent<Image>();
 
             _input.Actions.PlayerTurret.Fire.performed += ctx => _isFire = true;
             _input.Actions.PlayerTurret.Fire.canceled += ctx => _isFire = false;
@@ -41,6 +47,14 @@ namespace GMTK
 
                 _lastFireTime = Time.time;
                 _reloadTime = _baseReloadTime / (_playerStats.GetLevelUpgrade(UI.UpgradeType.PLAYER_ATTACK_SPEED) * _scaleByLevelUpgrade);
+
+                _filledReloadImage.fillAmount = 0;
+                DOTween.To(
+                    () => _filledReloadImage.fillAmount,
+                    value => _filledReloadImage.fillAmount = value,
+                    1,
+                    _reloadTime
+                );
             }
 
             var screenPosition = (Vector3)_input.Actions.PlayerTurret.Pointer.ReadValue<Vector2>();
