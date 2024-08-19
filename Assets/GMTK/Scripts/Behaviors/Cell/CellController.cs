@@ -5,7 +5,6 @@ using GMTK.Services;
 using GMTK.UI;
 using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -23,11 +22,13 @@ namespace GMTK
         [SerializeField] private Bounds _entrailsArea;
         [SerializeField] private Vector2 _maxVelocity;
 
+        private AudioSource _audioSource;
         private SpriteRenderer _spriteRenderer;
         private Animator _animator;
         private InCellViruses _inCellVirusManager;
         private VirusSpawner _virusSpawner;
         private CellManager _cellManager;
+        private GameStatistics _gameStatistics;
         private Rigidbody2D _rb;
         private int _virusCount = 0;
 
@@ -37,12 +38,14 @@ namespace GMTK
 
         private void Start()
         {
+            _audioSource = GetComponent<AudioSource>();
             _rb = GetComponent<Rigidbody2D>();
             _animator = GetComponent<Animator>();
             _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
             _inCellVirusManager = GetComponentInChildren<InCellViruses>(true);
             _cellManager = ServiceLocator.Instance.Get<CellManager>();
             _virusSpawner = ServiceLocator.Instance.Get<VirusSpawner>();
+            _gameStatistics = ServiceLocator.Instance.Get<GameStatistics>();
 
             _inCellVirusManager.GetComponent<InCellVirusManager>().OnObjectRemoved += OnDestroyVirus;
 
@@ -58,12 +61,21 @@ namespace GMTK
 
         public void OnAddVirus()
         {
+            if (_virusCount == 0)
+                _gameStatistics.CellSick();
+
             _virusCount += 1;
         }
 
         public void OnDestroyVirus()
         {
             _virusCount -= 1;
+
+            if (_virusCount == 0)
+            {
+                _health = 100;
+                _gameStatistics.CellRecovered();
+            }
         }
 
         private IEnumerator PoisonCoroutine()
@@ -105,6 +117,8 @@ namespace GMTK
 
             _animator.enabled = true;
             _animator.Play("Base Layer.Dead");
+
+            _audioSource.Play();
 
             if (_cellManager.Pool.Count == 0)
                 ServiceLocator.Instance.Get<HUD>().GameOverGroup(true);

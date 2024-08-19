@@ -1,5 +1,4 @@
 using GMTK.Services;
-using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -20,6 +19,9 @@ namespace GMTK.UI
 
         private TextMeshProUGUI _timeTextMesh;
 
+        private TextMeshProUGUI _statisticsTextMesh;
+        private string _statisticsTextPattern;
+
         public void AdviceGetOutSet(bool isActive)
         {
             _adviceGetOut.gameObject.SetActive(isActive);
@@ -28,6 +30,11 @@ namespace GMTK.UI
         public void GameOverGroup(bool isActive)
         {
             _gameOverGroup.gameObject.SetActive(isActive);
+
+            if (ServiceLocator.Instance.Get<CellManager>().Pool.Count == 0)
+                _gameOverGroup.Find("YouDied").GetComponent<TextMeshProUGUI>().text = "All Cells Have Died";
+
+            _upgradeGroup.gameObject.SetActive(false);
             _barsGroup.gameObject.SetActive(false);
         }
 
@@ -57,8 +64,18 @@ namespace GMTK.UI
 
             _barsGroup = transform.Find("Bars");
 
-            _timeTextMesh = transform.Find("Time").GetComponent<TextMeshProUGUI>();
+            _timeTextMesh = transform.Find("Timer").GetComponent<TextMeshProUGUI>();
             StartCoroutine(StartTime());
+
+            _statisticsTextMesh = transform.Find("Statistics").GetComponent<TextMeshProUGUI>();
+            _statisticsTextPattern = _statisticsTextMesh.text;
+            ServiceLocator.Instance.Get<GameStatistics>().OnStatisticsChange += (int livingCells, int sickCells, int diedCells) =>
+            {
+                _statisticsTextMesh.text = _statisticsTextPattern
+                    .Replace("{lc}", $"{livingCells:D2}")
+                    .Replace("{sc}", $"{sickCells:D2}")
+                    .Replace("{cd}", $"{diedCells:D2}");
+            };
         }
 
         private IEnumerator StartTime()

@@ -10,26 +10,39 @@ namespace GMTK
     {
         [SerializeField] private Transform _virusPrefab;
         [SerializeField] private float _virusCount;
-        [SerializeField] private Bounds _spawnBounds;
+        [SerializeField] private float _distanceFromCenter;
 
         private VirusManager _virusManager;
+        private GameStatistics _gameStatistics;
 
         private void Awake()
         {
-            _virusManager = transform.AddComponent<VirusManager>();
-            ServiceLocator.Instance.Register(_virusManager);
             ServiceLocator.Instance.Register(this);
 
-            for (int i = 0; i < _virusCount; ++i)
-                SpawnVirus();
+            _virusManager = transform.AddComponent<VirusManager>();
+            ServiceLocator.Instance.Register(_virusManager);
+
+            _gameStatistics = ServiceLocator.Instance.Get<GameStatistics>();
+        }
+
+        private void Update()
+        {
+            if (_virusManager.Pool.Count == 0 && _gameStatistics.SickCells() < 2)
+            {
+                for (int i = 0; i < _virusCount; ++i)
+                    SpawnVirus();
+
+                _virusCount *= 1.5f;
+            }
         }
 
         public void SpawnVirus()
         {
+            var rad = Random.Range(0, Mathf.PI * 2);
             var position = new Vector3(
-                Random.Range(_spawnBounds.min.x, _spawnBounds.max.x),
-                Random.Range(_spawnBounds.min.y, _spawnBounds.max.y),
-                0
+                _distanceFromCenter * Mathf.Sin(rad),
+                _distanceFromCenter * Mathf.Cos(rad),
+               0
             );
 
             SpawnVirus(position);

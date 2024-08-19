@@ -8,12 +8,14 @@ namespace GMTK
 {
     public class Medical : MonoBehaviour, IDamageable
     {
+        private AudioSource[] _audioSources;
         private Animator _animator;
         private bool _isWhole = true;
         private int _score = 0;
 
         private void Start()
         {
+            _audioSources = GetComponents<AudioSource>();
             _animator = GetComponent<Animator>();
         }
 
@@ -23,7 +25,9 @@ namespace GMTK
                 return;
 
             _isWhole = false;
+
             _animator.Play("Base Layer.Explosion");
+            _audioSources[0].Play();
 
             StartCoroutine(StartAnimationByDelay());
         }
@@ -38,6 +42,9 @@ namespace GMTK
 
         private void VitaminCallback()
         {
+            if (!_audioSources[1].isPlaying)
+                _audioSources[1].Play();
+
             _score += 1;
             if (_score == transform.childCount)
             {

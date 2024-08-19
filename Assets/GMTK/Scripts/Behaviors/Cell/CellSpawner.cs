@@ -27,6 +27,11 @@ namespace GMTK
 
             for (int i = 0; i < _cellCount; ++i)
                 SpawnCell();
+
+            var gameStatistics = ServiceLocator.Instance.Get<GameStatistics>();
+            gameStatistics.SetLivingCells((int)_cellCount);
+
+            _cellManager.OnObjectRemoved += () => gameStatistics.CellDied();
         }
 
         private void SpawnCell()
