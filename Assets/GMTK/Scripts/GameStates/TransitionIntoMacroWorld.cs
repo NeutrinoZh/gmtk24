@@ -38,6 +38,9 @@ namespace GMTK.GameStates
 
             var outsidePosition = _player.position + _player.right * 5;
 
+            if (Physics2D.Linecast(_player.position, outsidePosition, LayerMask.GetMask("Barier")))
+                outsidePosition = _player.position - _player.right * 5;
+
             DOTween.To(
                 () => _player.transform.localScale,
                 scale => _player.localScale = scale,
