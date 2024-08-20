@@ -1201,6 +1201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _orangePrefab: {fileID: 7466826437583407747, guid: 0183e584c89852141b0e344f8190177e, type: 3}
   _cucumberPrefab: {fileID: 7466826437583407747, guid: e788e810ecf524e428d803df54c730d0, type: 3}
+  _spinerPrefab: {fileID: 7466826437583407747, guid: b391c0c2e026c044a852aa29b551e53e, type: 3}
   _bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 2, y: 2, z: 0}

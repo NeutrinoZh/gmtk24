@@ -25,6 +25,8 @@ namespace GMTK.GameStates
             _player.GetComponent<DriftMovableObject>().Stop();
             _player.GetComponent<BoxCollider2D>().isTrigger = true;
             _player.GetChild(0).GetChild(0).localScale = new(0.3f, 0.3f, 1);
+
+            _player.GetComponent<AudioSource>().volume = 0.4f;
             _player.GetComponent<AudioList>().Play(1);
 
             nearestCell.GetComponent<Rigidbody2D>().isKinematic = true;
@@ -67,6 +69,7 @@ namespace GMTK.GameStates
            {
                _player.gameObject.layer = LayerMask.NameToLayer("InsideCellPlayer");
                _player.GetComponent<BoxCollider2D>().isTrigger = false;
+               _player.GetComponent<AudioSource>().volume = 1;
                //    _player.GetComponent<Rigidbody2D>().isKinematic = false;
 
                ServiceLocator.Instance.Get<HUD>().AdviceGetOutSet(true);

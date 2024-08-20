@@ -10,6 +10,7 @@ namespace GMTK.MicroViruses
     {
         [SerializeField] private Transform _orangePrefab;
         [SerializeField] private Transform _cucumberPrefab;
+        [SerializeField] private Transform _spinerPrefab;
         [SerializeField] private Bounds _bounds;
 
         private int _countSpawnedViruses;
@@ -42,6 +43,9 @@ namespace GMTK.MicroViruses
 
             if (_playerStats.Time >= 50)
                 prefabs.Add(_cucumberPrefab);
+
+            if (_playerStats.Time >= 100)
+                prefabs.Add(_spinerPrefab);
 
             var inCellVirus = Instantiate(prefabs[Random.Range(0, prefabs.Count)], transform);
             inCellVirus.GetComponent<InCellVirus>().Init(_virusManager);

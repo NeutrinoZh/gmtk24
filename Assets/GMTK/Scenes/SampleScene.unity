@@ -1071,7 +1071,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press 'E' for getout
+  m_text: Press 'E' to get out
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 94735ea2ee4f3d14db2ef36d7e97a877, type: 2}
   m_sharedMaterial: {fileID: 7634511417053610303, guid: 94735ea2ee4f3d14db2ef36d7e97a877, type: 2}
@@ -2950,8 +2950,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 13, y: 47}
-  m_SizeDelta: {x: 338.31, y: 112.26}
+  m_AnchoredPosition: {x: 0, y: 57.81}
+  m_SizeDelta: {x: 655.55, y: 155.88}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &873521873
 MonoBehaviour:
@@ -2973,9 +2973,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'YOU DIED
-
-'
+  m_text: YOU DIED
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 94735ea2ee4f3d14db2ef36d7e97a877, type: 2}
   m_sharedMaterial: {fileID: 7634511417053610303, guid: 94735ea2ee4f3d14db2ef36d7e97a877, type: 2}
@@ -3009,8 +3007,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -3297,7 +3295,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press 'E' for penetration
+  m_text: Press 'E' to penetration
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3669,7 +3667,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 202, y: -72}
+  m_AnchoredPosition: {x: 211, y: -69}
   m_SizeDelta: {x: 716.25, y: 112.26}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1158008445

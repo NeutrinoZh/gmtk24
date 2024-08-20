@@ -7,7 +7,8 @@ namespace GMTK.MicroViruses
     public enum InCellVirusBehaviorType
     {
         ORANGE,
-        CUCUMBER
+        CUCUMBER,
+        SPINER
     };
 
     public class InCellVirus : MonoBehaviour, IDamageable
@@ -47,6 +48,9 @@ namespace GMTK.MicroViruses
                     break;
                 case InCellVirusBehaviorType.CUCUMBER:
                     _virusBehavior = new CucumberVirus(_cucumberBulletPrefab);
+                    break;
+                case InCellVirusBehaviorType.SPINER:
+                    _virusBehavior = new SpinerVirus();
                     break;
                 default:
                     break;

@@ -46,6 +46,9 @@ namespace GMTK
 
         public void OnUpgrade(UpgradeType _upgrade)
         {
+            if (_playerStats.Level % 2 == 0)
+                _health += 1;
+
             if (_upgrade == UpgradeType.PLAYER_HP && _health < _maxHealth)
                 _health += 1;
             if (_upgrade == UpgradeType.PLAYER_ARMOR && Armor < 8)
@@ -57,7 +60,7 @@ namespace GMTK
             if (!_isAlive)
                 return;
 
-            float chanceIgnore = Armor / 10.0f;
+            float chanceIgnore = Armor / 6.0f;
             if (Random.Range(0.1f, 1.0f) < chanceIgnore)
                 Armor -= 1;
             else

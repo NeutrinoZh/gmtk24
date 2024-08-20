@@ -10,6 +10,7 @@
         "incell",
         "Mathf",
         "Rigidbody",
+        "SPINER",
         "Tweening",
         "UGUI"
     ]
