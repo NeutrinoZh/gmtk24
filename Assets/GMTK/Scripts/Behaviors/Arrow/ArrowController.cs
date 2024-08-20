@@ -36,10 +36,10 @@ namespace GMTK
 
         private bool CheckTargetPosition(Transform target)
         {
-            if (target.position.x >= Camera.main.OrthographicBounds().min.x &&
-                target.position.x <= Camera.main.OrthographicBounds().max.x &&
-                target.position.y >= Camera.main.OrthographicBounds().min.y &&
-                target.position.y <= Camera.main.OrthographicBounds().max.y)
+            if (target.position.x >= Camera.main.OrthographicBounds().min.x / 2 &&
+                target.position.x <= Camera.main.OrthographicBounds().max.x / 2 &&
+                target.position.y >= Camera.main.OrthographicBounds().min.y / 2 &&
+                target.position.y <= Camera.main.OrthographicBounds().max.y / 2)
 
                 return true;
             else
