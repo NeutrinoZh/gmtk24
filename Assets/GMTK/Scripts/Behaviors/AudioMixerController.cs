@@ -12,9 +12,10 @@ namespace GMTK
         [SerializeField] private AudioClip _gameplayTrack;
         [SerializeField] private AudioMixerGroup _master;
         [SerializeField] private AudioMixerGroup _incell;
-        private AudioSource _audioSource;
 
-        private bool f = false;
+        private AudioSource[] _audioSources;
+
+        private bool _needToChange = false;
 
         private void Awake()
         {
@@ -27,9 +28,7 @@ namespace GMTK
 
         public void TryInitialize()
         {
-            f = false;
 
-            Debug.Log(SceneManager.GetActiveScene().buildIndex);
             ServiceLocator.Instance.TryRegister(this, out bool status);
             if (!status)
             {
@@ -37,27 +36,42 @@ namespace GMTK
                 return;
             }
 
-            _audioSource = GetComponent<AudioSource>();
+            _audioSources = GetComponents<AudioSource>();
             DontDestroyOnLoad(this);
+
+            if (SceneManager.GetActiveScene().buildIndex == 1)
+            {
+                _needToChange = true;
+                _audioSources[0].loop = false;
+            }
+
+            if (SceneManager.GetActiveScene().buildIndex == 0)
+            {
+                _audioSources[1].Stop();
+                _audioSources[1].Play();
+                _audioSources[1].pitch = 0;
+                _audioSources[0].Play();
+            }
         }
 
         private void Update()
         {
-            if (!_audioSource.isPlaying && !f)
+            if (!_audioSources[0].isPlaying && _needToChange)
             {
-                f = true;
-                _audioSource.PlayOneShot(SceneManager.GetActiveScene().buildIndex == 0 ? _menuTrack : _gameplayTrack);
+                _needToChange = false;
+                _audioSources[0].Stop();
+                _audioSources[1].pitch = 1;
             }
         }
 
         public void SetIncell()
         {
-            _audioSource.outputAudioMixerGroup = _incell;
+            _audioSources[1].outputAudioMixerGroup = _incell;
         }
 
         public void SetMaster()
         {
-            _audioSource.outputAudioMixerGroup = _master;
+            _audioSources[1].outputAudioMixerGroup = _master;
         }
     }
 }
