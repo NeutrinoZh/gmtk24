@@ -1,4 +1,5 @@
 using GMTK.Services;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -9,11 +10,14 @@ namespace GMTK
     public class VirusSpawner : MonoBehaviour, IService
     {
         [SerializeField] private Transform _virusPrefab;
+        [SerializeField] private Transform _glistPrefab;
+
         [SerializeField] private float _virusCount;
         [SerializeField] private float _distanceFromCenter;
 
         private VirusManager _virusManager;
         private GameStatistics _gameStatistics;
+        private PlayerStats _playerStats;
 
         private void Awake()
         {
@@ -23,6 +27,7 @@ namespace GMTK
             ServiceLocator.Instance.Register(_virusManager);
 
             _gameStatistics = ServiceLocator.Instance.Get<GameStatistics>();
+            _playerStats = ServiceLocator.Instance.Get<PlayerStats>();
         }
 
         private void Update()
@@ -50,7 +55,14 @@ namespace GMTK
 
         public void SpawnVirus(Vector3 position)
         {
-            var virus = Instantiate(_virusPrefab, transform);
+            var prefabs = new List<Transform>(){
+                _virusPrefab
+            };
+
+            if (_playerStats.Time >= 80)
+                prefabs.Add(_glistPrefab);
+
+            var virus = Instantiate(prefabs[Random.Range(0, prefabs.Count)], transform);
             virus.SetPositionAndRotation(position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
 
             _virusManager.AddObject(virus);

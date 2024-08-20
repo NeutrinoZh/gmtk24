@@ -17,12 +17,15 @@ namespace GMTK.UI
         private PlayerDamageable _player;
         private PlayerStats _playerStats;
 
+        private AudioSource _audioSource;
+
         private void Awake()
         {
             _healthBarFilled = transform.GetChild(0).GetChild(1).GetComponent<Image>();
             _armorBarFilled = transform.GetChild(1).GetChild(1).GetComponent<Image>();
             _experienceFilled = transform.GetChild(2).GetChild(1).GetComponent<Image>();
             _textMeshLevel = transform.GetChild(2).GetComponentInChildren<TextMeshProUGUI>();
+            _audioSource = GetComponent<AudioSource>();
         }
 
         private void Start()
@@ -56,6 +59,7 @@ namespace GMTK.UI
             {
                 if (isNewLevel)
                 {
+                    _audioSource.Play();
                     ServiceLocator.Instance.Get<HUD>().UpgradeDialog(true);
                     _experienceFilled.fillAmount = 0;
                 }

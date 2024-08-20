@@ -6,7 +6,7 @@ namespace GMTK.MicroViruses
     public class SpinerVirus : VirusBehavior
     {
         private const float k_impulse = 5f;
-        private const float k_attackCooldown = 5f;
+        private const float k_attackCooldown = 4f;
 
         private Transform _transform;
         private Transform _target;
