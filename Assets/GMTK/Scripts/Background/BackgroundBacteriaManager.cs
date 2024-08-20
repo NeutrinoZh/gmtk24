@@ -28,6 +28,7 @@ namespace GMTK
             {
                 int randomBacteriaIndex = Random.Range(0, _prefabs.Count);
                 BackgroundBacteria backgroundBacteria = Instantiate(_prefabs[randomBacteriaIndex], transform);
+                backgroundBacteria.transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
                 backgroundBacteria.Init(GetRandomDestinationList());
             }
         }
@@ -55,7 +56,7 @@ namespace GMTK
 
                     j++;
 
-                    if (j >= MAX_CHOICES_VALUE || isCongruentWithOtherDestinations) 
+                    if (j >= MAX_CHOICES_VALUE || isCongruentWithOtherDestinations)
                     {
                         destinationList.Add(pos);
                         _allDestinations.Add(pos);

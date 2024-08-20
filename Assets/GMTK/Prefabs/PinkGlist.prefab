@@ -174,9 +174,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40e1111841f6bde4db3b4f86583ef695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _delayBeforePenetration: 5
+  _delayBeforePenetration: 8
   _damageMaterial: {fileID: 2100000, guid: ff1c34b5819982642a8c9b8f51409db0, type: 2}
-  _maxHealth: 5
+  _maxHealth: 4
 --- !u!50 &6840762720480993118
 Rigidbody2D:
   serializedVersion: 4

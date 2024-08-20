@@ -41,7 +41,7 @@ namespace GMTK.MicroViruses
 
         public override void OnEnable()
         {
-            _attackTime = Time.time + k_attackCooldown;
+            _attackTime = Time.time + Random.Range(0, k_attackCooldown * 1.5f);
             _animationPlaying = false;
         }
 
