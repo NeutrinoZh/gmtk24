@@ -28,7 +28,6 @@ namespace GMTK
 
         public void TryInitialize()
         {
-
             ServiceLocator.Instance.TryRegister(this, out bool status);
             if (!status)
             {

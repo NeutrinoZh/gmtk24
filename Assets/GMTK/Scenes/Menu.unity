@@ -211,7 +211,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2074.978, y: 0.0010035}
+  m_AnchoredPosition: {x: -76, y: 0.0010035}
   m_SizeDelta: {x: 2210.99, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &260997220
@@ -227,8 +227,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1155,7 +1155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 1732729011}
-  _fadeInPanel: {fileID: 260997219}
+  _fadeInPanel: {fileID: 260997220}
   _fadeInEndValue: 0
   _fadeOutEndValue: 2500
   _fadeDuration: 3
