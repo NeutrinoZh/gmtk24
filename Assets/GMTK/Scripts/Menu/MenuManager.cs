@@ -18,9 +18,6 @@ public class MenuManager : MonoBehaviour
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
-        Color color = _fadeInPanel.color;
-        color.a = Mathf.Clamp01(0);
-        _fadeInPanel.color = color;
     }
 
     public void Play()
@@ -38,8 +35,8 @@ public class MenuManager : MonoBehaviour
     private IEnumerator DelayBeforeSceneLoad()
     {
         yield return new WaitForSeconds(0.5f);
-        _fadeInPanel.localPosition = new Vector3(_fadeOutEndValue, 0);
-        _fadeInPanel.DOLocalMoveX(_fadeInEndValue, _fadeDuration).OnComplete(() => LoadGameScene());
+        // _fadeInPanel.localPosition = new Vector3(_fadeOutEndValue, 0);
+        // _fadeInPanel.DOLocalMoveX(_fadeInEndValue, _fadeDuration).OnComplete(() => LoadGameScene());
     }
 
     private IEnumerator DelayBeforePlay(float waitTime)

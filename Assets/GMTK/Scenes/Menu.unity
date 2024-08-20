@@ -149,7 +149,7 @@ PlayableDirector:
   m_Enabled: 1
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: ebff6c3997bcd5f4490dd042cc335953, type: 2}
-  m_InitialState: 1
+  m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
@@ -1159,6 +1159,7 @@ MonoBehaviour:
   _fadeInEndValue: 0
   _fadeOutEndValue: 2500
   _fadeDuration: 3
+  _cutscene: {fileID: 59254647}
 --- !u!4 &1800793703
 Transform:
   m_ObjectHideFlags: 0
@@ -1185,7 +1186,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: d0d6c835ce66be845953aded6325fc5c, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
 
-namespace GMTK 
+namespace GMTK
 {
     public class BackgroundBacteria : MonoBehaviour
     {
@@ -13,13 +13,14 @@ namespace GMTK
         private bool _isInitialized = false;
         private float _currentProgress;
 
-        private void Update() 
+        private void Update()
         {
             if (!_isInitialized) return;
 
-            transform.position = Vector2.Lerp(_previousDestination, _currentDestination, _currentProgress/_maxProgress);
+            transform.position = Vector2.Lerp(_previousDestination, _currentDestination, _currentProgress / _maxProgress);
+            transform.right = (_currentDestination - _previousDestination).normalized;
 
-            if (_currentProgress >= _maxProgress) 
+            if (_currentProgress >= _maxProgress)
             {
                 SetNewDestination(_currentDestination);
                 _currentProgress = 0;
@@ -27,14 +28,14 @@ namespace GMTK
             else _currentProgress += Time.deltaTime;
         }
 
-        void SetNewDestination(Vector2 previousDest) 
+        void SetNewDestination(Vector2 previousDest)
         {
             int index = _destinationsList.IndexOf(previousDest);
             _previousDestination = _destinationsList[index];
             _currentDestination = _destinationsList[index < _destinationsList.Count - 1 ? ++index : 0];
         }
 
-        public void Init(List<Vector2> destinationLists) 
+        public void Init(List<Vector2> destinationLists)
         {
             _currentProgress = 0;
             _destinationsList = destinationLists.AsReadOnly();
