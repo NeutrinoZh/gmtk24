@@ -4,10 +4,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FadeManager : MonoBehaviour, IService
 {
-    [SerializeField] private Transform _fadeInPanel;
+    [SerializeField] private Image _fadeInPanel;
     [SerializeField] private float _fadeInEndValue;
     [SerializeField] private float _fadeOutEndValue;
     [SerializeField] private float _fadeDuration;
@@ -18,13 +19,21 @@ public class FadeManager : MonoBehaviour, IService
 
     public void FadeIn(Action onCompleteAction)
     {
-        _fadeInPanel.localPosition = new Vector3(_fadeOutEndValue, 0, _fadeInPanel.position.z);
-        _fadeInPanel.DOLocalMoveX(_fadeInEndValue, _fadeDuration).OnComplete(() => { onCompleteAction(); });
+        DOTween.To(
+              () => _fadeInPanel.color.a,
+              value => _fadeInPanel.color = new(_fadeInPanel.color.r, _fadeInPanel.color.g, _fadeInPanel.color.b, value),
+              1.0f,
+              0.3f
+        ).OnComplete(() => onCompleteAction());
     }
 
     public void FadeOut()
     {
-        _fadeInPanel.localPosition = new Vector3(_fadeInEndValue, 0, _fadeInPanel.localPosition.z);
-        _fadeInPanel.DOLocalMoveX(_fadeOutEndValue, _fadeDuration);
+        DOTween.To(
+              () => _fadeInPanel.color.a,
+              value => _fadeInPanel.color = new(_fadeInPanel.color.r, _fadeInPanel.color.g, _fadeInPanel.color.b, value),
+              0.0f,
+              0.3f
+        );
     }
 }

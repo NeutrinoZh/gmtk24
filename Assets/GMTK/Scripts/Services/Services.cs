@@ -27,14 +27,19 @@ namespace GMTK.Services
 
         public void TryRegister<T>(T service, out bool status) where T : IService
         {
-            if (_services.TryGetValue(typeof(T), out var existingService) && existingService != null && existingService != (IService)service) 
+            if (_services.TryGetValue(typeof(T), out var existingService) && existingService != null && existingService != (IService)service)
             {
                 status = false;
                 return;
             }
-            else 
+            else
             {
-                Register(service);
+                if (existingService == null)
+                    _services.Remove(typeof(T));
+
+                if (existingService != (IService)service)
+                    Register(service);
+
                 status = true;
             }
         }
