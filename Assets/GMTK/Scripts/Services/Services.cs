@@ -25,6 +25,25 @@ namespace GMTK.Services
 #endif
         }
 
+        public void TryRegister<T>(T service, out bool status) where T : IService
+        {
+            if (_services.TryGetValue(typeof(T), out var existingService) && existingService != null && existingService != (IService)service) 
+            {
+                status = false;
+                return;
+            }
+            else 
+            {
+                Register(service);
+                status = true;
+            }
+        }
+
+        public bool Contains<T>() where T : IService
+        {
+            return _services.ContainsKey(typeof(T));
+        }
+
         public T Get<T>() where T : IService
         {
             return (T)_services[typeof(T)];
