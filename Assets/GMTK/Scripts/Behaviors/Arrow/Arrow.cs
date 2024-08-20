@@ -1,4 +1,5 @@
 using GMTK.Services;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace GMTK
@@ -8,6 +9,7 @@ namespace GMTK
         [SerializeField] private SpriteRenderer _spriteRenderer;
 
         private VirusManager _virusManager;
+        private VirusCellManager _virusCellManager;
         private Transform _target;
         private Sprite _arrowSprite;
 
@@ -15,7 +17,11 @@ namespace GMTK
 
         public Transform FindTargetPosition()
         {
-            return _virusManager.FindNearToPoint(transform.position);
+            var value = _virusManager.FindNearToPoint(transform.position);
+            if (value != null) return value;
+
+            value = _virusCellManager.FindNearToPoint(transform.position);
+            return value;
         }
 
         public void SetArrowState(bool state)
@@ -29,7 +35,9 @@ namespace GMTK
         private void Start()
         {
             _virusManager = ServiceLocator.Instance.Get<VirusManager>();
+            _virusCellManager = ServiceLocator.Instance.Get<VirusCellManager>();
             _virusManager.OnObjectRemoved += SetNewTarget;
+            _virusCellManager.OnObjectRemoved += SetNewTarget;
 
             _arrowSprite = _spriteRenderer.sprite;
         }

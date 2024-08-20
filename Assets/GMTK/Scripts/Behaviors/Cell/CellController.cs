@@ -31,6 +31,7 @@ namespace GMTK
         private GameStatistics _gameStatistics;
         private Rigidbody2D _rb;
         private int _virusCount = 0;
+        private VirusCellManager _virusCellManager;
 
         private float _health = 100f;
 
@@ -46,6 +47,7 @@ namespace GMTK
             _cellManager = ServiceLocator.Instance.Get<CellManager>();
             _virusSpawner = ServiceLocator.Instance.Get<VirusSpawner>();
             _gameStatistics = ServiceLocator.Instance.Get<GameStatistics>();
+            _virusCellManager = ServiceLocator.Instance.Get<VirusCellManager>();
 
             _inCellVirusManager.GetComponent<InCellVirusManager>().OnObjectRemoved += OnDestroyVirus;
 
@@ -62,7 +64,10 @@ namespace GMTK
         public void OnAddVirus()
         {
             if (_virusCount == 0)
+            {
                 _gameStatistics.CellSick();
+                _virusCellManager.AddObject(transform);
+            }
 
             _virusCount += 1;
         }
@@ -74,6 +79,7 @@ namespace GMTK
             if (_virusCount == 0)
             {
                 _health = 100;
+                _virusCellManager.RemoveObject(transform);
                 _gameStatistics.CellRecovered();
             }
         }
