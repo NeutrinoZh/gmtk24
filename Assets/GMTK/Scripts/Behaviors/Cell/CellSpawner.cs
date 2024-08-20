@@ -5,6 +5,7 @@ using UnityEngine;
 namespace GMTK
 {
     public class CellManager : ObjectManager { };
+    public class VirusCellManager : ObjectManager { };
 
     public class CellSpawner : MonoBehaviour
     {
@@ -19,11 +20,14 @@ namespace GMTK
         [SerializeField] private Bounds _spawnBounds;
 
         private CellManager _cellManager;
+        private VirusCellManager _virusCellManager;
 
         private void Awake()
         {
             _cellManager = transform.AddComponent<CellManager>();
+            _virusCellManager = transform.AddComponent<VirusCellManager>();
             ServiceLocator.Instance.Register(_cellManager);
+            ServiceLocator.Instance.Register(_virusCellManager);
 
             for (int i = 0; i < _cellCount; ++i)
                 SpawnCell();
