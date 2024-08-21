@@ -1,17 +1,62 @@
+using GMTK.Services;
+using System;
+
 namespace GMTK.GameStates
 {
-    public class GamePlayState : IState
+    public enum WorldState
     {
-        private readonly GameStateManager _stateManager;
+        MICRO_WORLD,
+        MACRO_WORLD
+    };
 
-        public GamePlayState(GameStateManager stateManager)
+    public class GamePlayState : IState, IService
+    {
+        public GamePlayState(GameStateManager stateManager) { }
+        public Action<WorldState> OnWorldChanged;
+
+        private WorldState _worldState = WorldState.MACRO_WORLD;
+        private VirusManager _virusManager;
+
+        public WorldState State
         {
-            _stateManager = stateManager;
+            get => _worldState;
+            set
+            {
+                _virusManager ??= ServiceLocator.Instance.Get<VirusManager>();
+
+                if (value == _worldState)
+                    return;
+
+                if (value == WorldState.MICRO_WORLD)
+                    TransitionIntoMicroWorld();
+
+                if (value == WorldState.MACRO_WORLD)
+                    TransitionIntoMacroWorld();
+
+                _worldState = value;
+                OnWorldChanged?.Invoke(value);
+            }
+        }
+
+        private void TransitionIntoMicroWorld()
+        {
+            new TransitionIntoMicroWorld()
+                .Start(this);
+
+            _virusManager.gameObject.SetActive(false);
+        }
+
+        private void TransitionIntoMacroWorld()
+        {
+            new TransitionIntoMacroWorld()
+                .Start(this);
+
+            _virusManager.gameObject.SetActive(true);
         }
 
         void IState.Enter()
         {
-
+            ServiceLocator.Instance.Register(this);
         }
 
         void IState.Update()

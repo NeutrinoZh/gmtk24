@@ -6,6 +6,7 @@ Thumbs.db
 *.app
 *.exe
 *.war
+*.zip
 *-autosave.kra
 
 *.blob
@@ -20,6 +21,7 @@ obj/
 *.png~
 
 [Bb]uild/
+[Bb]uilds/
 [Ll]ibrary/
 [Uu]serSettings/
 [Tt]emp/

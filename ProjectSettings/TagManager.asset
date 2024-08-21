@@ -11,16 +11,16 @@ TagManager:
   - 
   - Water
   - UI
+  - Ally
+  - Enemy
+  - InsideCell
+  - PostProcessing
+  - Cell
+  - BulletMacro
+  - BulletMicro
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - InsideCellPlayer
+  - Barier
   - 
   - 
   - 

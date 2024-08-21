@@ -2,14 +2,14 @@
     "name": "Actions",
     "maps": [
         {
-            "name": "Main",
+            "name": "PlayerBody",
             "id": "82dbc453-2c8e-4032-8468-2f28e8986d93",
             "actions": [
                 {
-                    "name": "Pointer",
+                    "name": "Move",
                     "type": "Value",
-                    "id": "d8f551ac-4746-414e-aaa5-8144a03016cf",
-                    "expectedControlType": "Touch",
+                    "id": "7eed9a70-124a-4169-8de0-a139388f4692",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -17,13 +17,161 @@
             ],
             "bindings": [
                 {
+                    "name": "2D Vector",
+                    "id": "bdb7d59b-7c78-49d5-aa3c-3ee50fd780e8",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "0cb5e8ec-20fa-432e-b069-47f505c3a0d6",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "0f3aab71-77eb-440a-834f-f063c375762f",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "33b223be-5c43-4be4-82b6-30115f90c0ee",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "5c6c5d0f-fe1c-4eb4-ba8c-e0e54d85da19",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        },
+        {
+            "name": "PlayerTurret",
+            "id": "0c94d8b7-d505-4ed1-b8dd-f0aa76a7aa42",
+            "actions": [
+                {
+                    "name": "Pointer",
+                    "type": "Value",
+                    "id": "5497c5c2-1abf-422c-ac5b-bc778c7ce934",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Fire",
+                    "type": "Button",
+                    "id": "f0e6bffc-ce56-4f8a-8b38-5ff261b5eb14",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
                     "name": "",
-                    "id": "ca9103a3-c59a-49d8-8ffb-6340678eb15f",
-                    "path": "<Touchscreen>/primaryTouch",
+                    "id": "e6e2c81f-bb45-49c9-bd13-20e48cab6248",
+                    "path": "<Pointer>/position",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Pointer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c764edb7-83aa-4030-90da-26ee617e292a",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "PlayerPenetration",
+            "id": "69f12287-da9f-4b89-be53-70e32eeae7b9",
+            "actions": [
+                {
+                    "name": "Penetration",
+                    "type": "Button",
+                    "id": "48e1e559-7557-4439-86b9-ab81437c761e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "cdbda100-c381-4746-a2f0-1b87bb3d10a1",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Penetration",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "GameOver",
+            "id": "fdc67e28-7208-46c1-9415-37ff97cafe13",
+            "actions": [
+                {
+                    "name": "AnyKey",
+                    "type": "Button",
+                    "id": "13859336-fe79-41a9-bb11-a50bbf183e71",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "8df92aa4-7428-4a94-b3d5-5b990d85651a",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AnyKey",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
