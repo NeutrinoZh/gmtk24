@@ -28,8 +28,7 @@ namespace GMTK.GameStates
 
         private void RegisterServices()
         {
-            ServiceLocator.Instance.Reset();
-            ServiceLocator.Instance.Register(new ResourceManager());
+            ServiceLocator.Init();
             ServiceLocator.Instance.Register(new InputController());
             ServiceLocator.Instance.Register(new PlayerStats());
             ServiceLocator.Instance.Register(new GameStatistics());

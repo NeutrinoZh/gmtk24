@@ -19,32 +19,29 @@ namespace GMTK
 
         private void Awake()
         {
-            SceneManager.sceneLoaded += OnSceneLoaded;
-        }
-
-        private void OnDestroy() => SceneManager.sceneLoaded -= OnSceneLoaded;
-
-        private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1) => TryInitialize();
-
-        public void TryInitialize()
-        {
-            ServiceLocator.Instance.TryRegister(this, out bool status);
-            if (!status)
+            if (ServiceLocator.Instance.Contains<AudioMixerController>())
             {
                 Destroy(gameObject);
                 return;
             }
 
-            _audioSources = GetComponents<AudioSource>();
+            ServiceLocator.Instance.RegisterGlobal(this);
+
+            SceneManager.sceneLoaded += OnSceneLoaded;
             DontDestroyOnLoad(this);
 
-            if (SceneManager.GetActiveScene().buildIndex == 1)
+            _audioSources = GetComponents<AudioSource>();
+        }
+
+        private void OnSceneLoaded(Scene scene, LoadSceneMode _)
+        {
+            if (scene.buildIndex == 1)
             {
                 _needToChange = true;
                 _audioSources[0].loop = false;
             }
 
-            if (SceneManager.GetActiveScene().buildIndex == 0)
+            if (scene.buildIndex == 0)
             {
                 _audioSources[1].Stop();
                 _audioSources[1].Play();
