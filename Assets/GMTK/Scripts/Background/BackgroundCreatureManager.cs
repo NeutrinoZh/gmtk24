@@ -1,15 +1,13 @@
-using GMTK.Services;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace GMTK
 {
-    public class BackgroundBacteriaManager : MonoBehaviour
+    public class BackgroundCreatureManager : MonoBehaviour
     {
         public const int MAX_CHOICES_VALUE = 500;
 
-        [SerializeField] private List<BackgroundBacteria> _prefabs;
+        [SerializeField] private BackgroundCreature _prefab;
         [SerializeField] private int _startBacteriaCount;
         [SerializeField] private Bounds _bounds;
         [SerializeField] private int _destinationsCount = 3;
@@ -26,8 +24,7 @@ namespace GMTK
         {
             for (int i = 0; i < _startBacteriaCount; ++i)
             {
-                int randomBacteriaIndex = Random.Range(0, _prefabs.Count);
-                BackgroundBacteria backgroundBacteria = Instantiate(_prefabs[randomBacteriaIndex], transform);
+                BackgroundCreature backgroundBacteria = Instantiate(_prefab, transform);
                 backgroundBacteria.transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
                 backgroundBacteria.Init(GetRandomDestinationList());
             }

@@ -4,12 +4,15 @@ using UnityEngine;
 
 namespace GMTK
 {
-    public class BackgroundBacteria : MonoBehaviour
+    public class BackgroundCreature : MonoBehaviour
     {
-        private ReadOnlyCollection<Vector2> _destinationsList;
+        [SerializeField] private Sprite[] _sprites;
         [SerializeField] private Vector2 _currentDestination;
         [SerializeField] private Vector2 _previousDestination;
         [SerializeField] private float _maxProgress = 5;
+
+        private ReadOnlyCollection<Vector2> _destinationsList;
+        private SpriteRenderer _spriteRenderer;
         private bool _isInitialized = false;
         private float _currentProgress;
 
@@ -37,11 +40,24 @@ namespace GMTK
 
         public void Init(List<Vector2> destinationLists)
         {
+            SetSprite();
+
             _currentProgress = 0;
             _destinationsList = destinationLists.AsReadOnly();
             transform.position.Set(_destinationsList[0].x, _destinationsList[0].y, 0);
             SetNewDestination(_destinationsList[0]);
             _isInitialized = true;
+        }
+
+        private void SetSprite()
+        {
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+
+            var i = Random.Range(0, _sprites.Length);
+            _spriteRenderer.sprite = _sprites[i];
+
+            var sortingOrder = Random.Range(-101, -106);
+            _spriteRenderer.sortingOrder = sortingOrder;
         }
     }
 }

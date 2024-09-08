@@ -5588,7 +5588,7 @@ GameObject:
   - component: {fileID: 2136286277}
   - component: {fileID: 2136286276}
   m_Layer: 0
-  m_Name: BGBacteriaManager
+  m_Name: BGCreatureManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5606,12 +5606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c578949b5b20839d49d42a63c5833468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefabs:
-  - {fileID: 3436207439594672594, guid: 46a1485dcddba1a61a018af12fdc54fb, type: 3}
-  - {fileID: 4390634558351479706, guid: bf5207df213d68898b7a607f7cac1110, type: 3}
-  - {fileID: 6521005446078053830, guid: 11231c688001d5b9a8874dea4aa36b54, type: 3}
-  - {fileID: 3436207439594672594, guid: e3ed2416e750193478bb1c74052dc605, type: 3}
-  - {fileID: 3436207439594672594, guid: 106ba4fb805321b4d9e3df4eed8f8804, type: 3}
+  _prefab: {fileID: 6521005446078053830, guid: 11231c688001d5b9a8874dea4aa36b54, type: 3}
   _startBacteriaCount: 45
   _bounds:
     m_Center: {x: 0, y: 0, z: 0}
